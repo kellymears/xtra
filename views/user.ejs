@@ -1,0 +1,58 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+  <% include partials/head %>
+
+  <body>
+
+    <% include partials/nav %>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <% user.forEach(function(user) { %>
+              <h1>@<%= user.username %></h1>
+              <span class="subheading"><%= user.bio %></span>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+
+          <% posts.forEach(function(post) { %>
+
+            <div class="post-preview">
+              <a href="/@<%= post.username %>/<%= post.title %>">
+                <h2 class="post-title">
+                  <%= post.title %>
+                </h2>
+                <h3 class="post-subtitle">
+                  <%= post.body %>
+                </h3>
+              </a>
+              <p class="post-meta">Posted by
+                <a href="#"><%= post.username %></a>
+                on <%= post.$created %></p>
+            </div>
+            <hr>
+
+          <% }); %>
+
+        </div>
+      </div>
+    </div>
+
+    <% include partials/footer %>
+
+  </body>
+</html>
