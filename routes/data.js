@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { usersCollection, postsCollection } = require('../models');
 
-router.get('/data/create-user', function(req,res){
+router.get('/create-user', function(req,res){
   var match = usersCollection.where({ username: 'quaid' });
 
   usersCollection.insert({
@@ -13,7 +13,7 @@ router.get('/data/create-user', function(req,res){
 
 });
 
-router.get('/data/create-examples', function(req,res){
+router.get('/create-examples', function(req,res){
 
   posts.insert([
     {title: "sphinx phalanx cyclops", body: "hello world", username: 'quaid' },
@@ -24,7 +24,7 @@ router.get('/data/create-examples', function(req,res){
 
 });
 
-router.get('/data/delete-all', function(req,res){
+router.get('/delete-all', function(req,res){
   var users = usersCollection.items;
 
   for (var i = 0, len = users.length; i < len; i++) {
