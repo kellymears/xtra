@@ -1,29 +1,28 @@
-const express = require('express');
-const router = express.Router();
-const { usersCollection, postsCollection } = require('../models');
-
+const express = require('express')
+const mongoose = require('mongoose')
+const router = express.Router()
+const { User, Post } = require('../models')
 
 /* view index */
 router.get('/', function(req, res){
-  var posts = postsCollection.items;
-
-  res.render('index', {
-    posts: posts
-  });
-
   console.log('index accessed')
-});
+  Post.find({}, function(err, posts) {
+    if (err) throw err;
+    console.log(posts)
+    res.render('index', {
+      posts: posts
+    })
+  })
+})
 
 /* view user */
 router.get('/@:username/', function(req,res){
-  var user = usersCollection.where({ username: req.params.username });
-  var posts = postsCollection.where({ username: req.params.username });
-
+  var user = usersCollection.where({ username: req.params.username })
+  var posts = postsCollection.where({ username: req.params.username })
   res.render('user', {
     user: user.items,
     posts: posts.items
-  });
-
+  })
   console.log('user accessed')
 });
 
@@ -36,7 +35,7 @@ router.get('/@:username/:post', function(req,res){
     user: user.items,
     posts: posts.items
   });
- 
+
   console.log('post accessed');
 });
 

@@ -1,14 +1,17 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const app = express()
 const http = require('http').Server(app)
+const bodyParser = require('body-parser')
 
-const routes = require('./routes');
+const routes = require('./routes')
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
 
-app.use(express.static('public'));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-// Pulls in all of the routes from the routes folder.
 routes(app);
 
 /* server listen */
