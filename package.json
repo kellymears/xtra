@@ -1,0 +1,22 @@
+{
+  "name": "xtra",
+  "version": "0.0.1",
+  "description": "blogging platform for radicals",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "locallydb": "^0.0.9"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kellymears/xtra.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kellymears/xtra/issues"
+  },
+  "homepage": "https://github.com/kellymears/xtra#readme"
+}
