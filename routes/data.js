@@ -4,7 +4,6 @@ const { usersCollection, postsCollection } = require('../models');
 
 router.get('/create-user', function(req,res){
   var match = usersCollection.where({ username: 'quaid' });
-
   usersCollection.insert({
     username: "quaid",
     bio: "Hi. My name is Quaid. I write software"

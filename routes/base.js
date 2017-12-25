@@ -1,30 +1,43 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const router = express.Router()
 const { User, Post } = require('../models')
 
-/* view index */
 router.get('/', function(req, res){
-  console.log('index accessed')
   Post.find({}, function(err, posts) {
     if (err) throw err;
-    console.log(posts)
     res.render('index', {
       posts: posts
     })
   })
 })
 
-/* view user */
-router.get('/@:username/', function(req,res){
-  var user = usersCollection.where({ username: req.params.username })
-  var posts = postsCollection.where({ username: req.params.username })
-  res.render('user', {
-    user: user.items,
-    posts: posts.items
+/* need to figure out how to render the results of multiple queries */
+router.get('/@:username', function(req,res){
+  /* query 1 */
+  User.find({}, function(err, users){
+    if (err) throw err;
   })
-  console.log('user accessed')
-});
+  /* query 2 */
+  Post.find({}, function(err, posts){
+    if (err) throw err;
+  })
+  /* render */
+  res.render('user', {
+    user: users,
+    posts: posts,
+  })
+})
+
+router.get('/@:username/:post', function(req,res){
+  User.find({}, function(err, users){
+    if (err) throw err;
+  })
+  Post.find({}, function(err, posts){
+    if (err) throw err;
+  })
+})
+
+/* everything below is crap */
 
 /* view post */
 router.get('/@:username/:post', function(req,res){
@@ -37,18 +50,6 @@ router.get('/@:username/:post', function(req,res){
   });
 
   console.log('post accessed');
-});
-
-/* create post */
-router.get('/create', function(req,res){
-  res.render('create');
-  console.log('create accessed');
-});
-
-/* edit post */
-router.get('/edit/@:username/:post', function(req,res){
-  res.render('edit');
-  console.log('edit accessed');
 });
 
 module.exports = router;

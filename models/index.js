@@ -17,7 +17,7 @@ var userSchema = new Schema({
 var postSchema = new Schema({
 		title: String,
 		subtitle: String,
-		author: String,
+		user: String,
 		body: String,
 		date: {
 			type: Date,
