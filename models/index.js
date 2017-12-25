@@ -10,13 +10,13 @@ db.once('open', function() {
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-		bio: String,
-    name: {
-      first: String,
-      last: String
-    }
+  username: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+	bio: String,
+  name: {
+    first: String,
+    last: String
+  }
 })
 
 userSchema.virtual('fullName').get(function () {
@@ -24,15 +24,13 @@ userSchema.virtual('fullName').get(function () {
 })
 
 var postSchema = new Schema({
-		title: String,
-		subtitle: String,
-		user: String,
-		body: String,
-		date: { type: Date, default: Date.now },
-		meta: { claps: Number }
+	title: String,
+	subtitle: String,
+	user: String,
+	body: String,
+	date: { type: Date, default: Date.now },
+	meta: { claps: Number }
 })
-
-
 
 module.exports = {
 	User: mongoose.model('User', userSchema),
