@@ -10,8 +10,17 @@ db.once('open', function() {
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-    username: String,
-		bio: String
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+		bio: String,
+    name: {
+      first: String,
+      last: String
+    }
+})
+
+userSchema.virtual('fullName').get(function () {
+  return this.name.first + ' ' + this.name.last
 })
 
 var postSchema = new Schema({
@@ -19,15 +28,11 @@ var postSchema = new Schema({
 		subtitle: String,
 		user: String,
 		body: String,
-		date: {
-			type: Date,
-			default: Date.now
-		},
-		meta: {
-    	votes: Number,
-    	favs:  Number
-  	}
+		date: { type: Date, default: Date.now },
+		meta: { claps: Number }
 })
+
+
 
 module.exports = {
 	User: mongoose.model('User', userSchema),
