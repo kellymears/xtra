@@ -1,38 +1,28 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
   <% include partials/head %>
-
   <body>
-
     <% include partials/nav %>
-
-    <!-- Page Header -->
-    <header class="masthead" style="background-image: url('img/home-bg.jpg')">
-      <div class="overlay"></div>
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto">
-            <div class="site-heading">
-              <% user.forEach(function(user) { %>
-              <h1>@<%= user.username %></h1>
-              <span class="subheading"><%= user.bio %></span>
-              <% }); %>
+    <% user.forEach(function(user) { %>
+      <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+              <div class="site-heading">
+                <h1>@<%= user.username %></h1>
+                <span class="subheading"><%= user.bio %></span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
+      </header>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-
           <% posts.forEach(function(post) { %>
-
             <div class="post-preview">
-              <a href="/@<%= post.username %>/<%= post.title %>">
+              <a href="/@<%= user.username %>/<%= post.title %>">
                 <h2 class="post-title">
                   <%= post.title %>
                 </h2>
@@ -41,18 +31,56 @@
                 </h3>
               </a>
               <p class="post-meta">Posted by
-                <a href="#"><%= post.username %></a>
-                on <%= post.$created %></p>
+                <a href="/@<%= post.author.username %>"><%= post.author.username %></a> on <%= post.date.created %>
+              </p>
             </div>
             <hr>
-
-          <% }); %>
-
+          <% }) %>
         </div>
       </div>
     </div>
-
+    <br><br>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+              <form id="create-form" method="post" action="/api/post/create">
+                    <div class="form-register-with-email">
+                        <div class="form-white-background">
+                            <div class="form-title-row">
+                                <h3>Create a Post as <%= user.username %></h3>
+                            </div>
+                            <div class="form-row">
+                                <label>
+                                    <span>Title</span>
+                                    <input type="text" name="title">
+                                </label>
+                            </div>
+                            <div class="form-row">
+                                <label>
+                                    <span>Subtitle</span>
+                                    <input type="subtitle" name="subtitle">
+                                </label>
+                            </div>
+                            <div class="form-row">
+                                <label>
+                                    <span>Body</span>
+                                    <input type="textarea" name="body">
+                                </label>
+                            </div>
+                            <input type="hidden" name="author" value="<%= user._id %>">
+                            <input type="hidden" name="username" value="<%= user.username %>">
+                            <div class="form-row">
+                                <button type="submit">Get Started</button>
+                            </div>
+                        </div>
+                    </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% }) %>
     <% include partials/footer %>
-
   </body>
 </html>

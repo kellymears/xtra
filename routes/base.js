@@ -4,52 +4,39 @@ const { User, Post } = require('../models')
 
 router.get('/', function(req, res){
   Post.find({}, function(err, posts) {
-    if (err) throw err;
-    res.render('index', {
-      posts: posts
+    User.find({}, function(err, users) {
+      res.render('index', {
+        posts: posts,
+        users: users
+      })
     })
   })
 })
 
-/* need to figure out how to render the results of multiple queries */
 router.get('/@:username', function(req,res){
-  /* query 1 */
-  User.find({}, function(err, users){
-    if (err) throw err;
-  })
-  /* query 2 */
-  Post.find({}, function(err, posts){
-    if (err) throw err;
-  })
-  /* render */
-  res.render('user', {
-    user: users,
-    posts: posts,
+  User.find({ username: req.params.username }, function(err, user) {
+    Post.
+    find({'author.username': req.params.username }).
+    exec(function (err, posts) {
+      if (err) return handleError(err)
+      res.render('user', {
+        user: user,
+        posts: posts
+      })
+    })
   })
 })
 
 router.get('/@:username/:post', function(req,res){
-  User.find({}, function(err, users){
-    if (err) throw err;
-  })
-  Post.find({}, function(err, posts){
-    if (err) throw err;
+  Post.
+  find({
+    'author.username': req.params.username,
+    title: decodeURIComponent(req.params.post)
+  }).
+  exec(function (err, posts) {
+    if (err) return handleError(err)
+    res.render('post', { posts: posts })
   })
 })
 
-/* everything below is crap */
-
-/* view post */
-router.get('/@:username/:post', function(req,res){
-  var user = usersCollection.where({ username: req.params.username });
-  var posts = postsCollection.where("@username == '" + req.params.username + "' && @title == '" + req.params.post +"'");
-
-  res.render('post', {
-    user: user.items,
-    posts: posts.items
-  });
-
-  console.log('post accessed');
-});
-
-module.exports = router;
+module.exports = router

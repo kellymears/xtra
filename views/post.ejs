@@ -1,71 +1,43 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
   <% include partials/head %>
-
   <body>
-
-    <% include partials/user-nav %>
-
+    <% include partials/nav %>
     <% posts.forEach(function(post) { %>
-
-    <!-- Page Header -->
-    <header class="masthead">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 col-md-10 mx-auto" style="min-height:3em;">
+          <div class="col-lg-1 mx-auto" style="padding-top:1.9em;">
+            <button id="clap" class="clap">
+              <span>
+                <!--  SVG Created by Luis Durazo from the Noun Project  -->
+                <svg id="clap--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
+                <path d="M-471.2 366.8c1.2 1.1 1.9 2.6 2.3 4.1.4-.3.8-.5 1.2-.7 1-1.9.7-4.3-1-5.9-2-1.9-5.2-1.9-7.2.1l-.2.2c1.8.1 3.6.9 4.9 2.2zm-28.8 14c.4.9.7 1.9.8 3.1l16.5-16.9c.6-.6 1.4-1.1 2.1-1.5 1-1.9.7-4.4-.9-6-2-1.9-5.2-1.9-7.2.1l-15.5 15.9c2.3 2.2 3.1 3 4.2 5.3zm-38.9 39.7c-.1-8.9 3.2-17.2 9.4-23.6l18.6-19c.7-2 .5-4.1-.1-5.3-.8-1.8-1.3-2.3-3.6-4.5l-20.9 21.4c-10.6 10.8-11.2 27.6-2.3 39.3-.6-2.6-1-5.4-1.1-8.3z"/>
+                <path d="M-527.2 399.1l20.9-21.4c2.2 2.2 2.7 2.6 3.5 4.5.8 1.8 1 5.4-1.6 8l-11.8 12.2c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l34-35c1.9-2 5.2-2.1 7.2-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l28.5-29.3c2-2 5.2-2 7.1-.1 2 1.9 2 5.1.1 7.1l-28.5 29.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.4 1.7 0l24.7-25.3c1.9-2 5.1-2.1 7.1-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l14.6-15c2-2 5.2-2 7.2-.1 2 2 2.1 5.2.1 7.2l-27.6 28.4c-11.6 11.9-30.6 12.2-42.5.6-12-11.7-12.2-30.8-.6-42.7m18.1-48.4l-.7 4.9-2.2-4.4m7.6.9l-3.7 3.4 1.2-4.8m5.5 4.7l-4.8 1.6 3.1-3.9"/>
+                </svg>
+              </span>
+              <span id="clap--count" class="clap--count"></span>
+              <span id="clap--count-total" class="clap--count-total"></span>
+            </button>
           </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-1 mx-auto" style="padding-top:1.9em;">
-          <button id="clap" class="clap">
-            <span>
-              <!--  SVG Created by Luis Durazo from the Noun Project  -->
-              <svg id="clap--icon" xmlns="http://www.w3.org/2000/svg" viewBox="-549 338 100.1 125">
-              <path d="M-471.2 366.8c1.2 1.1 1.9 2.6 2.3 4.1.4-.3.8-.5 1.2-.7 1-1.9.7-4.3-1-5.9-2-1.9-5.2-1.9-7.2.1l-.2.2c1.8.1 3.6.9 4.9 2.2zm-28.8 14c.4.9.7 1.9.8 3.1l16.5-16.9c.6-.6 1.4-1.1 2.1-1.5 1-1.9.7-4.4-.9-6-2-1.9-5.2-1.9-7.2.1l-15.5 15.9c2.3 2.2 3.1 3 4.2 5.3zm-38.9 39.7c-.1-8.9 3.2-17.2 9.4-23.6l18.6-19c.7-2 .5-4.1-.1-5.3-.8-1.8-1.3-2.3-3.6-4.5l-20.9 21.4c-10.6 10.8-11.2 27.6-2.3 39.3-.6-2.6-1-5.4-1.1-8.3z"/>
-              <path d="M-527.2 399.1l20.9-21.4c2.2 2.2 2.7 2.6 3.5 4.5.8 1.8 1 5.4-1.6 8l-11.8 12.2c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l34-35c1.9-2 5.2-2.1 7.2-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l28.5-29.3c2-2 5.2-2 7.1-.1 2 1.9 2 5.1.1 7.1l-28.5 29.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.4 1.7 0l24.7-25.3c1.9-2 5.1-2.1 7.1-.1 2 1.9 2 5.2.1 7.2l-24.7 25.3c-.5.5-.4 1.2 0 1.7.5.5 1.2.5 1.7 0l14.6-15c2-2 5.2-2 7.2-.1 2 2 2.1 5.2.1 7.2l-27.6 28.4c-11.6 11.9-30.6 12.2-42.5.6-12-11.7-12.2-30.8-.6-42.7m18.1-48.4l-.7 4.9-2.2-4.4m7.6.9l-3.7 3.4 1.2-4.8m5.5 4.7l-4.8 1.6 3.1-3.9"/>
-              </svg>
-            </span>
-            <span id="clap--count" class="clap--count"></span>
-            <span id="clap--count-total" class="clap--count-total"></span>
-          </button>
-        </div>
-        <div class="col-lg-10 mx-auto">
-          <div class="post-preview">
-            <a href="/@<%= post.username %>/<%= post.title %>">
+          <div class="col-lg-10 mx-auto">
+            <div class="post-preview">
               <h2 class="post-title">
-                <%= post.title %>
+                <a href=""><%= post.title %></a>
               </h2>
               <h3 class="post-subtitle">
-                <%= post.body %>
+                <%= post.subtitle %>
               </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="/@<%= post.username %>"><%= post.username %></a>
-              on Date</p>
-
-            <p>Sometimes life can seem like an endless string of problems. If you’ve ever been laid off, endured a breakup, struggled in school — or all 3 at once! — you’ll know what I mean.</p>
-            <p>When curveballs keep coming, it can feel like you’re all alone, or that you’re trapped in an unsolvable puzzle.</p>
-            <blockquote>
-              Here’s the good news — everybody on the planet has faced challenges. Even the most successful people you know have had conflicts at work and in school, and have lived to tell the tale.
-            </blockquote>
-            <p>This means your network is full of folks who have “been through it,” and can offer support and advice when you’re in a jam. Here’s how to get started:</p>
-            <h3>Reach Out.</h3>
-            <p>This is hard, especially for the high achievers among us. If you’re used to getting straight A’s or nailing every presentation, it can be uncomfortable to admit when you’re having a hard time. Please don’t try to go it alone. If you’re afraid of how you’ll be perceived, talk to trusted friends first.</p>
-            <h3>Kill your Heroes and Smash the Fascist State</h3>
-            <p>The scale of US military operations is remarkable. The US Department of Defense has (as of a 2010 inventory) 4,999 military facilities, of which 4,249 are in the United States; 88 are in overseas US territories; and 662 are in 36 foreign countries and foreign territories, in all regions of the world. Not counted in this list are the secret facilities of the US intelligence agencies. The cost of running these military operations and the wars they support is extraordinary, around $900 billion per year, or 5 percent of US national income, when one adds the budgets of the Pentagon, the intelligence agencies, homeland security, nuclear weapons programs in the Department of Energy, and veterans benefits. The $900 billion in annual spending is roughly one-quarter of all federal government outlays.</p>
+              <p class="post-meta">Posted by
+                <a href="/@<%= post.author.username %>"><%= post.author.username %></a>
+                on <a href="/@<%= post.author.username %>/<%= post.title %>">
+                  <%= post.date.created %></a>
+              </p>
+              <%= post.body %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <% }); %>
-
+    <% }) %>
     <% include partials/footer %>
 
     <script>
@@ -75,10 +47,10 @@
     var clapCount = document.getElementById('clap--count');
     var clapTotalCount = document.getElementById('clap--count-total');
     var initialNumberOfClaps = generateRandomNumber(500, 10000);
-    var btnDimension = 80;
-    var tlDuration = 300;
-    var numberOfClaps = 0;
-    var clapHold = void 0;
+    var btnDimension = 80
+    var tlDuration = 300
+    var numberOfClaps = 0
+    var clapHold = void 0
 
     var triangleBurst = new mojs.Burst({
       parent: clap,

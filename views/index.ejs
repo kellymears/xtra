@@ -1,13 +1,8 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
   <% include partials/head %>
-
   <body>
-
     <% include partials/nav %>
-
-    <!-- Page Header -->
     <header class="masthead" style="background-image: url('img/home-bg.jpg')">
       <div class="overlay"></div>
       <div class="container">
@@ -21,32 +16,102 @@
         </div>
       </div>
     </header>
-
-    <!-- Main Content -->
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          <% posts.forEach(function(post) { %>
           <div class="post-preview">
-            <a href="@<%= post.username %>/<%= post.title %>">
-              <h2 class="post-title">
-                <%= post.title %>
-              </h2>
-              <h3 class="post-subtitle">
-                <%= post.body %>
-              </h3>
-            </a>
-            <p class="post-meta">Posted by
-              <a href="/@<%= post.username %>/">@<%= post.username %></a>
-              on <%= post.$created %></p>
+            <h1>Posts:</h1>
           </div>
-          <hr>
-          <% }); %>
         </div>
       </div>
     </div>
-
+    <% posts.forEach(function(post) { %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+              <a href="@<%= post.author.username %>/<%= post.title %>">
+                <h3 class="post-title">
+                  <%= post.title %>
+                </h3>
+                <h4 class="post-subtitle">
+                  <%= post.body %>
+                </h4>
+              </a>
+              <p class="post-meta">Posted by
+                <a href="/@<%= post.author.username %>/"><%= post.author.username %></a> on <%= post.date.updated %></p>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <h1>Users:</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% users.forEach(function(user) { %>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-preview">
+              <a href="@<%= user.username %>">
+                <h3 class="post-title">
+                  <%= user.username %>
+                </h3>
+              </a>
+                <h4 class="post-subtitle">
+                  <%= user.email %>
+                </h4>
+            </div>
+            <hr>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <form id="create-form" method="post" action="/api/user/create">
+                  <div class="form-register-with-email">
+                      <div class="form-white-background">
+                          <div class="form-title-row">
+                              <h1>Create an account</h1>
+                          </div>
+                          <div class="form-row">
+                              <label>
+                                  <span>Username</span>
+                                  <input type="text" name="username">
+                              </label>
+                          </div>
+                          <div class="form-row">
+                              <label>
+                                  <span>Email</span>
+                                  <input type="email" name="email">
+                              </label>
+                          </div>
+                          <div class="form-row">
+                              <label>
+                                  <span>Password</span>
+                                  <input type="password" name="password">
+                              </label>
+                          </div>
+                          <div class="form-row">
+                              <button type="submit">Get Started</button>
+                          </div>
+                      </div>
+                  </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <% include partials/footer %>
-
   </body>
 </html>
