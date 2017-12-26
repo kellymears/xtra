@@ -4,12 +4,7 @@ const { User, Post } = require('../models')
 
 router.get('/', function(req, res){
   Post.find({}, function(err, posts) {
-    User.find({}, function(err, users) {
-      res.render('index', {
-        posts: posts,
-        users: users
-      })
-    })
+    console.log(posts)
   })
 })
 
