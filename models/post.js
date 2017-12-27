@@ -1,7 +1,7 @@
-var Schema = require('mongoose').Schema
+var mongoose = require('mongoose')
+var Schema = mongoose.Schema
 
 var postSchema = new Schema({
-  _id: Schema.Types.ObjectId,
 	title: String,
 	subtitle: String,
 	author: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -9,32 +9,27 @@ var postSchema = new Schema({
   date: {
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }
-  },
-	meta: {
-    clappers: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-    comments: Number
-  },
+  }
 })
+
+/* the idea of the below is to prepopulate db fields for posts.
+no work so far.
+ref: https://alexzywiak.github.io/best-of-both-worlds-modelling-relational-data-with-mongoose/index.html
 
 postSchema.pre('init', function(next, data) {
   Post.populate(data, {
     path: 'author'
   }, function(err, post) {
     data = post
-    next()
   })
-})
+  next()
+}) */
 
 postSchema.pre('save', function(next) {
   this.date.updated = new Date()
   if (!this.date.created)
     this.date.created = this.date.updated
   next()
-})
-
-postSchema.virtual('edited').get(function () {
-  if (this.date.created != this.date.updated)
-    return true
 })
 
 module.exports = postSchema
