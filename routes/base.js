@@ -39,7 +39,7 @@ router.get('/post-create', function(req,res){
       title: 'grabbable title',
       subtitle: 'subtitle',
       body: 'body',
-      author: mongoose.Types.ObjectId(user._id),
+      author: user[0]._id,
     })
     newPost.save(function(err){
       if (err) console.log(err)
