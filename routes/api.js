@@ -19,6 +19,7 @@ router.post('/user/create', function(req, res){
   newUser.save(function(err){
     if (err) console.log(err)
     res.json(newUser)
+    next()
   })
 })
 
@@ -33,6 +34,7 @@ router.post('/post/create', function(req,res){
   newPost.save(function(err){
     if (err) console.log(err)
     res.json(newPost)
+    next()
   })
 })
 
