@@ -26,12 +26,13 @@
                   <%= post.title %>
                 </h2>
                 <h3 class="post-subtitle">
-                  <%= post.body %>
+                  <%= post.subtitle %>
                 </h3>
               </a>
               <p class="post-meta">Posted by
                 <a href="/@<%= post.author.username %>"><%= post.author.username %></a> on <%= post.date.created %>
               </p>
+              <p><%= post.body %></p>
             </div>
             <hr>
           <% }) %>
