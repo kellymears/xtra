@@ -16,15 +16,6 @@
         </div>
       </div>
     </header>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 col-md-10 mx-auto">
-          <div class="post-preview">
-            <h1>Posts:</h1>
-          </div>
-        </div>
-      </div>
-    </div>
     <% posts.forEach(function(post) { %>
       <div class="container">
         <div class="row">
@@ -39,7 +30,10 @@
                 </h4>
               </a>
               <p class="post-meta">Posted by
-                <a href="/@<%= post.author.username %>/"><%= post.author.username %></a> on <%= post.date.updated %></p>
+                <a href="/@<%= post.author.username %>/">
+                  <%= post.author.username %>
+                </a> on <%= post.date.updated %>
+              </p>
             </div>
             <hr>
           </div>

@@ -3,15 +3,14 @@
   <% include partials/head %>
   <body>
     <% include partials/nav %>
-    <% user.forEach(function(user) { %>
       <header class="masthead" style="background-image: url('img/home-bg.jpg')">
         <div class="overlay"></div>
         <div class="container">
           <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
               <div class="site-heading">
-                <h1>@<%= user.username %></h1>
-                <span class="subheading"><%= user.bio %></span>
+                <h1>@<%= author.username %></h1>
+                <span class="subheading"><%= author.bio %></span>
               </div>
             </div>
           </div>
@@ -22,7 +21,7 @@
         <div class="col-lg-8 col-md-10 mx-auto">
           <% posts.forEach(function(post) { %>
             <div class="post-preview">
-              <a href="/@<%= user.username %>/<%= post.title %>">
+              <a href="/@<%= post.author.username %>/<%= post.title %>">
                 <h2 class="post-title">
                   <%= post.title %>
                 </h2>
@@ -48,7 +47,7 @@
                     <div class="form-register-with-email">
                         <div class="form-white-background">
                             <div class="form-title-row">
-                                <h3>Create a Post as <%= user.username %></h3>
+                                <h3>Create a Post as <%= author.username %></h3>
                             </div>
                             <div class="form-row">
                                 <label>
@@ -68,8 +67,7 @@
                                     <input type="textarea" name="body">
                                 </label>
                             </div>
-                            <input type="hidden" name="author" value="<%= user._id %>">
-                            <input type="hidden" name="username" value="<%= user.username %>">
+                            <input type="hidden" name="author" value="<%= author._id %>">
                             <div class="form-row">
                                 <button type="submit">Get Started</button>
                             </div>
@@ -80,7 +78,6 @@
           </div>
         </div>
       </div>
-    <% }) %>
     <% include partials/footer %>
   </body>
 </html>
