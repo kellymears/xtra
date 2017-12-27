@@ -13,13 +13,11 @@ router.get('/', function(req, res){
 })
 
 router.get('/@:username', function(req,res){
-  User.findOne({
-    username: req.params.username
-  }).exec(function(err,user) {
-    Post.find({author: user._id}).populate({
-      path: 'author',
-      match: { username: req.params.username }
-    }).exec(function(err, posts) {
+  User.findOne({ username: req.params.username })
+  .exec(function(err,user) {
+    Post.find({ author: user._id })
+    .populate({ path: 'author' })
+    .exec(function(err, posts) {
       res.render('user', {
         author: user,
         posts: posts
