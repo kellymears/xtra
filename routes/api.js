@@ -4,6 +4,14 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const { User, Post } = require('../models')
 
+router.get('/posts/get', function(req,res){
+  console.log('api request for post data received')
+  Post.find().populate('author').exec(function(err, posts) {
+    console.log(posts)
+    res.json(posts)
+  })
+})
+
 router.post('/user/create', function(req, res){
   var newUser = User({
     _id: new mongoose.Types.ObjectId(),

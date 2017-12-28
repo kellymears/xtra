@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
+import {
+  Collapse,
+  Container,
+  Row,
+  Col,
+  Jumbotron,
+  Button
+} from 'reactstrap'
 
 class Users extends Component {
   render() {
     return (
-      <div className="Users">
-        <p><strong>This is the users component.</strong></p>
-      </div>
+      <Container>
+        <Row>
+          <Col>
+            <p><strong>This is the users component.</strong></p>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }

@@ -5,11 +5,12 @@ import { Header, Footer } from './components/app/App'
 import XtraRouter from './router'
 
 import './index.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 import registerServiceWorker from './registerServiceWorker'
 
 render(
-  <div>
+  <div id="App">
     <Header/>
     <XtraRouter/>
     <Footer/>
