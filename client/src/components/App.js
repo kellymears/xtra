@@ -14,7 +14,6 @@ class App extends Component {
           A <em>Medium</em> for Malcontents
         </p>
         <hr/>
-        <p><strong>This is so fucking difficult.</strong></p>
       </div>
     )
   }

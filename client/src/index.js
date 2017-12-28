@@ -7,13 +7,17 @@ import {
   Switch
 } from 'react-router-dom'
 
-import App from './App'
+import App from './components/App'
+import Posts from './components/posts/Posts'
 
 import registerServiceWorker from './registerServiceWorker'
 
 ReactDOM.render((
   <Router>
-    <Route path="/" component={App} />
+    <div>
+      <Route path="/" component={App} />
+      <Route path="/posts" component={Posts} />
+    </div>
   </Router>
 ), document.getElementById('root'))
 
