@@ -13,9 +13,12 @@ class App extends Component {
         <p className="App-intro">
           A <em>Medium</em> for Malcontents
         </p>
+        <hr/>
+        <p><strong>This is so fucking difficult.</strong></p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+
+export default App
