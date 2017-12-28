@@ -1,24 +1,17 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch
-} from 'react-router-dom'
+import { render } from 'react-dom'
 
-import App from './components/App'
-import Posts from './components/posts/Posts'
+import XtraRouter from './router'
+import App from './components/app/App'
 
 import registerServiceWorker from './registerServiceWorker'
 
-ReactDOM.render((
-  <Router>
-    <div>
-      <Route path="/" component={App} />
-      <Route path="/posts" component={Posts} />
-    </div>
-  </Router>
-), document.getElementById('root'))
+render(
+  <div>
+    <App/>
+    <XtraRouter/>
+  </div>,
+  document.getElementById('root')
+)
 
 registerServiceWorker()

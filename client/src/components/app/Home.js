@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class Posts extends Component {
+class Home extends Component {
   render() {
     return (
       <div className="Posts">
-        <p><strong>This is the posts component.</strong></p>
+        <p><strong>This is the home component.</strong></p>
       </div>
     )
   }
 }
 
-export default Posts
+export default Home
