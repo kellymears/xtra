@@ -1,8 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 
-import Header from './components/app/Header'
-import Footer from './components/app/Footer'
+import { Header, Footer } from './components/app/App'
 import XtraRouter from './router'
 
 import './index.css'
@@ -13,6 +12,7 @@ render(
   <div>
     <Header/>
     <XtraRouter/>
+    <Footer/>
   </div>,
   document.getElementById('root')
 )

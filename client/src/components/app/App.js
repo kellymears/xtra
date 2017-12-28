@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
-class Header extends Component {
+export class Header extends Component {
   render() {
     return (
       <div className="App">
@@ -16,4 +16,16 @@ class Header extends Component {
   }
 }
 
-export default Header
+export class Footer extends Component {
+  render() {
+    return (
+      <div className="Footer">
+        <h1>
+          <a href="https://github.com/kellymears/xtra">
+            Github
+          </a>
+        </h1>
+      </div>
+    )
+  }
+}
