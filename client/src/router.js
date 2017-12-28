@@ -11,19 +11,18 @@ import Posts from './components/posts/Posts'
 import Users from './components/users/Users'
 
 class XtraRouter extends Component {
-    constructor(props) {
-      super(props)
-    }
     render() {
         return (
-          <BrowserRouter>
-            <Switch>
-              <Route exact path="/" component={Home}/>
-              <Route path="/posts" component={Posts}/>
-              <Route path="/users" component={Users}/>
-              <Redirect from='*' to='/' />
-            </Switch>
-          </BrowserRouter>
+          <div className="routeContainer">
+            <BrowserRouter>
+              <Switch>
+                <Route exact path="/" component={Home}/>
+                <Route path="/posts" component={Posts}/>
+                <Route path="/users" component={Users}/>
+                <Redirect from='*' to='/' />
+              </Switch>
+            </BrowserRouter>
+          </div>
         )
     }
 }
