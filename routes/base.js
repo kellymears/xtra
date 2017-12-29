@@ -9,7 +9,6 @@ router.get('/', function(req, res){
     res.render('index', {
       posts: posts
     })
-    next()
   })
 })
 
@@ -23,7 +22,6 @@ router.get('/@:username', function(req,res){
         author: user,
         posts: posts
       })
-      next()
     })
   })
 })
@@ -40,7 +38,6 @@ router.get('/@:username/:post', function(req,res){
     res.render('post', {
       posts: posts
     })
-    next()
   })
 })
 
