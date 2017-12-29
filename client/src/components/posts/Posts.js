@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -26,7 +27,6 @@ class Posts extends Component {
   }
 
   render() {
-    console.log(this.state.posts)
     if(!(this.state.posts)) {
       return (
         <Container>
@@ -43,10 +43,11 @@ class Posts extends Component {
         <Container>
           <Row>
             <Col>
-              { this.state.posts.map(( {title, subtitle} ) => {
+              {
+                this.state.posts.map(( {title, subtitle} ) => {
                   return <p key={title}>{title} - {subtitle}</p>
-                }
-              ) }
+                })
+              }
             </Col>
           </Row>
         </Container>

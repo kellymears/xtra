@@ -10,6 +10,7 @@ import XtraNav from './components/app/Nav'
 import Home from './components/Home'
 import Posts from './components/posts/Posts'
 import Users from './components/users/Users'
+import User from './components/users/User'
 
 class XtraRouter extends Component {
   render() {
@@ -22,6 +23,7 @@ class XtraRouter extends Component {
               <Route exact path="/" component={Home}/>
               <Route path="/posts" component={Posts}/>
               <Route path="/users" component={Users}/>
+              <Route path="/@:user" component={User}/>
               <Redirect from='*' to='/' />
             </Switch>
           </div>

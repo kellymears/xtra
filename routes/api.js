@@ -12,6 +12,34 @@ router.get('/posts/get', function(req,res){
   })
 })
 
+router.get('/user/get/:username', function(req,res){
+  User.findOne({ username: req.params.username })
+  .exec(function(err,user) {
+    if(user) {
+      Post.find({ author: user._id })
+      .populate({ path: 'author' })
+      .exec(function(err, posts) {
+        res.json({ user: user, posts: posts })
+      })
+    }
+    else {
+      res.json(null)
+    }
+  })
+})
+
+router.get('/users/get', function(req,res){
+  User.find()
+  .exec(function(err,users) {
+    if(users) {
+        res.json(users)
+    }
+    else {
+      res.json(null)
+    }
+  })
+})
+
 router.post('/user/create', function(req, res){
   var newUser = User({
     _id: new mongoose.Types.ObjectId(),
