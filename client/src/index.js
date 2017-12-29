@@ -1,21 +1,13 @@
 import React from 'react'
 import { render } from 'react-dom'
-
-import { Header, Footer } from './components/app/App'
-import XtraRouter from './router'
-
-import './index.css'
-import 'bootstrap/dist/css/bootstrap.css'
-
 import registerServiceWorker from './registerServiceWorker'
 
+import XtraRouter from './router'
+
+import 'bootstrap/dist/css/bootstrap.css'
+
 render(
-  <div id="App">
-    <Header/>
-    <XtraRouter/>
-    <Footer/>
-  </div>,
+  <div id="App"><XtraRouter/></div>,
   document.getElementById('root')
 )
-
 registerServiceWorker()

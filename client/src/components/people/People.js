@@ -11,7 +11,7 @@ import {
   Button
 } from 'reactstrap'
 
-class Users extends Component {
+class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +40,7 @@ class Users extends Component {
         <Container>
           <Row>
             <Col>
+              <h1>People</h1>
               <p>Huh. It looks like there are no users.</p>
             </Col>
           </Row>
@@ -51,6 +52,9 @@ class Users extends Component {
         <Container>
           <Row>
             <Col>
+              <hr/>
+              <h1>People</h1>
+              <hr/>
               {
                 this.state.users.map(( {username, email} ) => {
                   console.log(username)
@@ -65,4 +69,4 @@ class Users extends Component {
   }
 }
 
-export default Users
+export default People

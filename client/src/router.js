@@ -6,11 +6,14 @@ import {
   Redirect
 } from 'react-router-dom'
 
+import { Footer } from './components/app/App'
 import XtraNav from './components/app/Nav'
-import Home from './components/Home'
-import Posts from './components/posts/Posts'
-import Users from './components/users/Users'
-import User from './components/users/User'
+import Home from './components/app/Home'
+
+import People from './components/people/People'
+import Person from './components/people/Person'
+import Stories from './components/stories/Stories'
+import Story from './components/stories/Story'
 
 class XtraRouter extends Component {
   render() {
@@ -21,12 +24,14 @@ class XtraRouter extends Component {
           <div className="routeContainer">
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route path="/posts" component={Posts}/>
-              <Route path="/users" component={Users}/>
-              <Route path="/@:user" component={User}/>
-              <Redirect from='*' to='/' />
+              <Route path="/@:person/:story" component={Story}/>
+              <Route path="/stories" component={Stories}/>
+              <Route path="/people" component={People}/>
+              <Route path="/@:person" component={Person}/>
+              <Redirect from='*' to='/'/>
             </Switch>
           </div>
+          <Footer/>
         </div>
       </BrowserRouter>
     )

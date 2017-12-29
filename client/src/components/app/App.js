@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
 
-export class Header extends Component {
+class Header extends Component {
   render() {
     return (
       <header className="Header">
@@ -14,7 +14,7 @@ export class Header extends Component {
   }
 }
 
-export class Footer extends Component {
+class Footer extends Component {
   render() {
     return (
       <footer className="Footer">
@@ -26,4 +26,9 @@ export class Footer extends Component {
       </footer>
     )
   }
+}
+
+export {
+  Header,
+  Footer
 }

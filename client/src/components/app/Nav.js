@@ -8,7 +8,11 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Collapse
+  Collapse,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap'
 
 import "./Nav.css"
@@ -18,6 +22,7 @@ class XtraNav extends Component {
     super(props);
     this.toggle = this.toggle.bind(this);
     this.state = {
+      isLoggedIn: false,
       isOpen: false
     }
   }
@@ -34,11 +39,28 @@ class XtraNav extends Component {
         <Collapse isOpen={this.state.isOpen} navbar>
           <Nav className="ml-auto" navbar>
             <NavItem>
-              <NavLink><Link to="/users">Users</Link></NavLink>
+              <NavLink><Link to="/people">People</Link></NavLink>
             </NavItem>
             <NavItem>
-              <NavLink><Link to="/posts">Posts</Link></NavLink>
+              <NavLink><Link to="/stories">Stories</Link></NavLink>
             </NavItem>
+            <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Get Started
+                </DropdownToggle>
+                <DropdownMenu >
+                  <DropdownItem>
+                   Login
+                  </DropdownItem>
+                  <DropdownItem>
+                    Create Account
+                  </DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem>
+                    Logout
+                  </DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
           </Nav>
         </Collapse>
       </Navbar>
