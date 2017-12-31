@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "blogging platform for radicals",
   "main": "index.js",
+  "license": "CC BY-NC-SA",
   "scripts": {
     "start": "node index.js"
   },

@@ -26,8 +26,9 @@ class Home extends Component {
                 <p className="lead">It uses the following technologies to <em>some</em> effect:</p>
                 <ListGroup>
                   <ListGroupItem>NodeJS</ListGroupItem>
+                  <ListGroupItem>Mongoose</ListGroupItem>
                   <ListGroupItem>Express</ListGroupItem>
-                  <ListGroupItem>MongooseJS</ListGroupItem>
+                  <ListGroupItem>Redux</ListGroupItem>
                   <ListGroupItem>React</ListGroupItem>
                   <ListGroupItem>Axios</ListGroupItem>
                   <ListGroupItem>Reactstrap</ListGroupItem>

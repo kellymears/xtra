@@ -14,6 +14,7 @@ router.get('/posts/get', function(req,res){
 
 router.get('/story/get/:person/:story', function(req,res){
   console.log('api request for post data received')
+  console.log(req.params)
   Post.find({
     title: decodeURIComponent(req.params.story)
   }).populate({
@@ -22,6 +23,7 @@ router.get('/story/get/:person/:story', function(req,res){
       username: req.params.person
     }
   }).exec(function(err, story) {
+    console.log(story[0])
     res.json(story[0])
   })
 })

@@ -13,7 +13,8 @@ import Home from './components/app/Home'
 import People from './components/people/People'
 import Person from './components/people/Person'
 import Stories from './components/stories/Stories'
-import Story from './components/stories/Story'
+
+import StoryContainer from './containers/StoryContainer'
 
 class XtraRouter extends Component {
   render() {
@@ -24,7 +25,7 @@ class XtraRouter extends Component {
           <div className="routeContainer">
             <Switch>
               <Route exact path="/" component={Home}/>
-              <Route path="/@:person/:story" component={Story}/>
+              <Route path="/@:person/:story" component={StoryContainer}/>
               <Route path="/stories" component={Stories}/>
               <Route path="/people" component={People}/>
               <Route path="/@:person" component={Person}/>

@@ -25,7 +25,6 @@ class Stories extends Component {
          })
       })
   }
-
   render() {
     return (
       <Container>
