@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getStoryData } from "../actions/storyActions"
+import { getStory } from "../actions/storyActions"
 import Story from "../components/stories/StoryComponent"
 
 class StoryContainer extends Component {
@@ -14,7 +14,6 @@ class StoryContainer extends Component {
     })
   }
   render() {
-    console.log(this.props.story)
     return (
       <Story story={this.props.story} />
     )
@@ -35,8 +34,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStory: (payload) => dispatch(getStoryData(payload))
+    getStory: (payload) => dispatch(getStory(payload))
   }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(StoryContainer)
+export default connect(mapStateToProps,
+  mapDispatchToProps)(StoryContainer)

@@ -3,9 +3,9 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker'
 
-import { store } from './store';
-
+import { store } from './store'
 import XtraRouter from './router'
+
 import 'bootstrap/dist/css/bootstrap.css'
 
 render(

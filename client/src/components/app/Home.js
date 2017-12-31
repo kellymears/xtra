@@ -29,6 +29,7 @@ class Home extends Component {
                   <ListGroupItem>Mongoose</ListGroupItem>
                   <ListGroupItem>Express</ListGroupItem>
                   <ListGroupItem>Redux</ListGroupItem>
+                  <ListGroupItem>Redux Thunk</ListGroupItem>
                   <ListGroupItem>React</ListGroupItem>
                   <ListGroupItem>Axios</ListGroupItem>
                   <ListGroupItem>Reactstrap</ListGroupItem>

@@ -44,23 +44,6 @@ class XtraNav extends Component {
             <NavItem>
               <NavLink><Link to="/stories">Stories</Link></NavLink>
             </NavItem>
-            <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Get Started
-                </DropdownToggle>
-                <DropdownMenu >
-                  <DropdownItem>
-                   Login
-                  </DropdownItem>
-                  <DropdownItem>
-                    Create Account
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>
-                    Logout
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
           </Nav>
         </Collapse>
       </Navbar>
