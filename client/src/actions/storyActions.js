@@ -5,26 +5,25 @@ function constructURI(payload,method) {
           payload.person + '/' + payload.story
 }
 
-function createdStory(payload) {
+function createdStory(story) {
+  console.log('createdStory action called')
   return {
     type: 'STORY_CREATE_SUCCESS',
-    story: payload
+    story: story
   }
 }
 
-export function createStory(payload) {
+export function createStory(story) {
+  console.log('createStory action called')
   return (dispatch) => {
-    axios.post(constructURI(payload,"post"))
-      .then(response => {
-        dispatch(createdStory(response.data))
-      })
+    dispatch(createdStory(story))
   }
 }
 
-function gotStory(payload) {
+function gotStory(story) {
   return {
     type: 'STORY_LOAD_SUCCESS',
-    story: payload
+    story: story
   }
 }
 

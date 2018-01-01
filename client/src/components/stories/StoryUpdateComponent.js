@@ -8,18 +8,14 @@ import {
   Button
 } from 'reactstrap'
 
-const Story = (props) => (
+const StoryUpdate = (props) => (
   <Container>
     <Row>
       <Col>
-        <h2>{props.title}</h2>
-        <h3>{props.subtitle}</h3>
-        <hr/>
-        {props.body}
-        <hr/>
+        <h5>Story Update Component</h5>
       </Col>
     </Row>
   </Container>
 )
 
-export default Story
+export default StoryUpdate

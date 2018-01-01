@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getStory } from "../actions/storyActions"
+import { getStory, createStory } from "../actions/storyActions"
 import Story from "../components/stories/StoryComponent"
+import StoryCreateContainer from "./StoryCreateContainer"
 
 class StoryContainer extends Component {
   componentDidMount(){
@@ -14,8 +15,12 @@ class StoryContainer extends Component {
     })
   }
   render() {
+    console.log(this.props.story)
     return (
-      <Story story={this.props.story} />
+      <div id="StoryContainer">
+        <Story {...this.props.story} />
+        <StoryCreateContainer />
+      </div>
     )
   }
 }
@@ -27,14 +32,14 @@ StoryContainer.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    story: state.story,
+    story: state.story.story,
     person: state.person,
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStory: (payload) => dispatch(getStory(payload))
+    getStory: (story) => dispatch(getStory(story))
   }
 }
 
