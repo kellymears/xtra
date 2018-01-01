@@ -6,7 +6,7 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import { Footer } from './components/app/App'
+import { Header, Footer } from './components/app/App'
 import XtraNav from './components/app/Nav'
 import Home from './components/app/Home'
 
@@ -21,6 +21,7 @@ class XtraRouter extends Component {
     return (
       <BrowserRouter>
         <div>
+          <Header />
           <XtraNav/>
           <div className="routeContainer">
             <Switch>
@@ -32,7 +33,6 @@ class XtraRouter extends Component {
               <Redirect from='*' to='/'/>
             </Switch>
           </div>
-          <Footer/>
         </div>
       </BrowserRouter>
     )

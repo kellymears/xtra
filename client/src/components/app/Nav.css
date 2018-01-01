@@ -1,7 +1,23 @@
 #XtraNav {
-  margin-bottom: 0em;
+  background:white!important;
+  margin-bottom:1em;
+}
+#XtraNav a {
+  color: black;
 }
 
-#XtraNav a {
-  color: white;
+/*
+@media (min-width: 768px) {
+  .navbar-brand {
+      position: absolute;
+      left: 50%;
+      text-align: center;
+      margin:0 auto;
+  }
 }
+
+@media (max-width: 768px) {
+  #XtraNav .mr-auto {
+    display: none;
+  }
+} */

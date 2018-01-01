@@ -33,19 +33,15 @@ class XtraNav extends Component {
   }
   render() {
     return (
-      <Navbar id="XtraNav" className="navbar-dark bg-dark sticky-top" toggleable>
-        <NavbarToggler right onClick={this.toggle} />
-        <NavbarBrand><Link to="/">XTRA</Link></NavbarBrand>
-        <Collapse isOpen={this.state.isOpen} navbar>
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink><Link to="/people">People</Link></NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink><Link to="/stories">Stories</Link></NavLink>
-            </NavItem>
-          </Nav>
-        </Collapse>
+      <Navbar id="XtraNav" className="navbar-light bg-light sticky-top" toggleable>
+        <Nav className="mr-auto" navbar>
+          <NavItem>
+            <NavLink><Link to="/people">People</Link></NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink><Link to="/stories">Stories</Link></NavLink>
+          </NavItem>
+        </Nav>
       </Navbar>
     )
   }

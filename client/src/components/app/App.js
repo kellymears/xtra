@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
+import { Link } from 'react-router-dom'
+
 import './App.css'
 
 class Header extends Component {
   render() {
     return (
       <header className="Header">
-        <img src={logo} className="Header-logo" alt="logo" />
-        <h1 className="Header-title">Welcome to XTRA</h1>
-        <h2 className="Header-subtitle">A <em>Medium</em> for Malcontents</h2>
+        <h1 className="Header-title"><Link to="/">XTRA</Link></h1>
       </header>
     )
   }

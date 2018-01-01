@@ -1,6 +1,7 @@
 export function story(state = [], action) {
   switch (action.type) {
     case 'STORY_LOAD_SUCCESS':
+      console.log(action.story)
       return {
         ...state,
         story: action.story
