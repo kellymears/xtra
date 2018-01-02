@@ -1,23 +1,37 @@
 #XtraNav {
   background:white!important;
-  margin-bottom:1em;
+  margin:0em auto 1em auto;
+  padding: .5em 0em .5em 0em;
+  max-width: 720px;
 }
-#XtraNav a {
+
+#XtraNav .nav {
+  background:white!important;
+}
+
+#XtraNav .nav a {
   color: black;
+  font-size:.9em;
 }
 
-/*
-@media (min-width: 768px) {
-  .navbar-brand {
-      position: absolute;
-      left: 50%;
-      text-align: center;
-      margin:0 auto;
-  }
+#XtraNav .col-10 {
+  padding-left: 0em;
 }
 
-@media (max-width: 768px) {
-  #XtraNav .mr-auto {
-    display: none;
-  }
-} */
+#XtraNav .col-2 {
+  padding-right: 0em;
+}
+
+#XtraNav .getStartedButton {
+  font-size:.9em!important;
+  padding:.5em 1.5em!important;
+  float:right;
+}
+
+.visible {
+  display: block!important;
+}
+
+.hidden {
+  display: none!important;
+}

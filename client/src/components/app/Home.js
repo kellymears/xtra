@@ -11,7 +11,6 @@ import {
   ListGroupItem
 } from 'reactstrap'
 
-import { Header } from './App'
 import StoryCreateContainer from '../../containers/StoryCreateContainer'
 
 class Home extends Component {
@@ -21,15 +20,11 @@ class Home extends Component {
         <Container>
           <Row>
             <Col>
-              <Alert color="primary">
-                To be real I have very little idea what I am doing.
-              </Alert>
-              <Jumbotron>
-                <h2 className="display-5">
-                  XTRA is currently in early development.
-                </h2>
-              </Jumbotron>
-              <p className="lead">It uses the following technologies to <em>some</em> effect:</p>
+              <h3>The aim of Xtra is to be a <em>Medium</em> for Malcontents</h3>
+              <h5>The internet was built on the principle of freely sharing
+              information, media and experiences, not being the fuckin' <em>Uber</em> of think pieces.</h5>
+              <hr/>
+              <h4 className="lead">Xtra is currently in very early development:</h4>
               <ListGroup>
                 <ListGroupItem>NodeJS</ListGroupItem>
                 <ListGroupItem>Mongoose</ListGroupItem>
@@ -39,6 +34,7 @@ class Home extends Component {
                 <ListGroupItem>React</ListGroupItem>
                 <ListGroupItem>Axios</ListGroupItem>
                 <ListGroupItem>Reactstrap</ListGroupItem>
+                <ListGroupItem>React Waypoint</ListGroupItem>
               </ListGroup>
               <br/>
               <StoryCreateContainer />

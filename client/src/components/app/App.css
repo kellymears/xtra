@@ -8,6 +8,39 @@
 .Header-title {
   color:black;
   font-size: 1.5em;
+  font-weight:bold;
+}
+
+.Header-title a:hover {
+  color:black;
+  text-decoration:none;
+}
+
+.aboutXTRA {
+  text-align:left!important;
+  margin-bottom:0em!important;
+  padding-bottom:0em!important;
+}
+
+.aboutXTRA a {
+  color:grey;
+  font-size:.8em;
+}
+
+.aboutXTRA a:hover {
+  text-decoration:none;
+  color:black;
+}
+
+.Header .getStartedButtonCol {
+  margin-right:0em;
+  padding-right:0em;
+}
+
+.Header .getStartedButton {
+  font-size:.9em!important;
+  padding:.5em 1.5em!important;
+  float:right;
 }
 
 @media (max-width: 768px) {
@@ -18,19 +51,4 @@
 
 .Header-title a {
   color:black;
-}
-
-.Footer {
-  background-color: #222;
-  padding: 20px;
-  color:white;
-  text-align:center;
-  position: fixed;
-  bottom: 0em;
-  width: 100%;
-}
-
-.Footer span a {
-  color: white;
-  font-size: 1em;
 }

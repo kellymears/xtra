@@ -6,8 +6,8 @@ import {
   Redirect
 } from 'react-router-dom'
 
-import { Header, Footer } from './components/app/App'
-import XtraNav from './components/app/Nav'
+import NavContainer from './containers/NavContainer'
+import MetaNavContainer from './containers/MetaNavContainer'
 import Home from './components/app/Home'
 
 import People from './components/people/People'
@@ -21,8 +21,8 @@ class XtraRouter extends Component {
     return (
       <BrowserRouter>
         <div>
-          <Header />
-          <XtraNav/>
+          <MetaNavContainer />
+          <NavContainer />
           <div className="routeContainer">
             <Switch>
               <Route exact path="/" component={Home}/>

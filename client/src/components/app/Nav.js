@@ -2,47 +2,38 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
 import {
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
   Nav,
   NavItem,
   NavLink,
   Collapse,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  Container,
+  Row,
+  Col,
+  Button
 } from 'reactstrap'
 
 import "./Nav.css"
 
 class XtraNav extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-    this.state = {
-      isLoggedIn: false,
-      isOpen: false
-    }
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
   render() {
     return (
-      <Navbar id="XtraNav" className="navbar-light bg-light sticky-top" toggleable>
-        <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink><Link to="/people">People</Link></NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink><Link to="/stories">Stories</Link></NavLink>
-          </NavItem>
-        </Nav>
-      </Navbar>
+      <Container id="XtraNav" className="sticky-top">
+        <Row>
+          <Col xs="10">
+            <Nav className="navbar-light bg-light">
+              <NavItem>
+                <NavLink><Link to="/people">People</Link></NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink><Link to="/stories">Stories</Link></NavLink>
+              </NavItem>
+            </Nav>
+          </Col>
+          <Col xs="2">
+            <Button className="getStartedButton" outline color="success">Get Started</Button>
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
