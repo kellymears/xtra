@@ -5,7 +5,6 @@ import { bindActionCreators } from 'redux'
 
 import { getStory, createStory } from "../actions/storyActions"
 import Story from "../components/stories/StoryComponent"
-import StoryCreateContainer from "./StoryCreateContainer"
 
 class StoryContainer extends Component {
   componentDidMount(){
@@ -19,7 +18,6 @@ class StoryContainer extends Component {
     return (
       <div id="StoryContainer">
         <Story {...this.props.story} />
-        <StoryCreateContainer />
       </div>
     )
   }

@@ -1,12 +1,17 @@
 {
-  "name": "client",
+  "name": "XtraClient",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "auth0-js": "^9.0.2",
     "axios": "^0.17.1",
     "bootstrap": "^4.0.0-beta.2",
+    "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-headroom": "^2.2.2",
+    "react-icons": "^2.2.7",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
@@ -20,7 +25,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
-  "proxy": "http://localhost:8888"
+  "proxy": "http://localhost:8888",
+  "devDependencies": {
+    "@storybook/react": "^3.3.3",
+    "@storybook/addon-actions": "^3.3.3",
+    "@storybook/addon-links": "^3.3.3"
+  }
 }

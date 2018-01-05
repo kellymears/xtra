@@ -35,37 +35,29 @@ class People extends Component {
     })
   }
   render() {
-    if(this.state.users==null) {
+    if(this.state.users==null)
       return (
-        <Container>
-          <Row>
-            <Col>
-              <h1>People</h1>
-              <p>Huh. It looks like there are no users.</p>
-            </Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col>
+            <h4>People</h4>
+            <p>Huh. It looks like there are no users.</p>
+          </Col>
+        </Row>
       )
-    }
-    else {
       return (
-        <Container>
-          <Row>
-            <Col>
-              <hr/>
-              <h1>People</h1>
-              <hr/>
-              {
-                this.state.users.map(( {username, email} ) => {
-                  console.log(username)
-                  return <p><Link to={`/@${username}`}>{username} - {email}</Link></p>
-                })
-              }
-            </Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col>
+            <h4>People</h4>
+            <hr/>
+            {
+              this.state.users.map(( {username, email} ) => {
+                console.log(username)
+                return <p><Link to={`/@${username}`}>{username} - {email}</Link></p>
+              })
+            }
+          </Col>
+        </Row>
       )
-    }
   }
 }
 

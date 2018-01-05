@@ -27,21 +27,18 @@ class Stories extends Component {
   }
   render() {
     return (
-      <Container>
-        <Row>
-          <Col>
-            <hr/>
-            <h1>Stories</h1>
-            <hr/>
-            {
-              this.state.posts.map(({title, subtitle, author}) => {
-                return <p key={title}>
-                <Link to={`/@${author.username}/${title}`}>{title}</Link> - {subtitle}</p>
-              })
-            }
-          </Col>
-        </Row>
-      </Container>
+      <Row>
+        <Col>
+          <h4>Stories</h4>
+          <hr/>
+          {
+            this.state.posts.map(({title, subtitle, author}) => {
+              return <p key={title}>
+              <Link to={`/@${author.username}/${title}`}>{title}</Link> - {subtitle}</p>
+            })
+          }
+        </Col>
+      </Row>
     )
   }
 }

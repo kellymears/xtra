@@ -3,18 +3,17 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux';
 import registerServiceWorker from './registerServiceWorker'
 
-import { store } from './store'
-import XtraRouter from './router'
+import { store } from './util/store'
+
+import XtraRouter from './util/router'
 
 import 'bootstrap/dist/css/bootstrap.css'
 
 render(
   <Provider store={store}>
-    <div id="App">
-      <XtraRouter/>
-    </div>
+    <XtraRouter/>
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('app')
 )
 
 registerServiceWorker()
