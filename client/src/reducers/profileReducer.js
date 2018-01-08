@@ -9,7 +9,10 @@ export function profile(state = [], action) {
       return {
         ...state,
         data: undefined,
+        signedOut: true
       }
+    case 'SIGNING_IN':
+      return state
     default:
       return state
   }

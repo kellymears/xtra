@@ -1,6 +1,6 @@
 .MetaNav {
   background-color: white;
-  padding: .5em 0em .5em 0em;
+  padding: .5em 1em .5em 1em;
   color: white;
   text-align: center;
   max-width:1140px;
@@ -76,4 +76,13 @@
 
 .MetaNav-title a {
   color:black;
+}
+
+.dropdown-menu.show {
+  top:20px!important;
+  left:-33px!important;
+}
+
+.profilePicture {
+  border-radius: 50%;
 }

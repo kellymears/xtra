@@ -1,6 +1,6 @@
 export const loadStateFromStorage = () => {
   try {
-    const serializedState = localStorage.getItem('state')
+    const serializedState = localStorage.getItem('state.profile')
     if(serializedState == null) {
       return undefined
     }
@@ -13,7 +13,7 @@ export const loadStateFromStorage = () => {
 export const saveStateToStorage = (state) => {
   try {
     const serializedState = JSON.stringify(state)
-    localStorage.setItem('state',serializedState)
+    localStorage.setItem('state.profile',serializedState)
   } catch (err) {
     // bleh
   }
@@ -21,8 +21,8 @@ export const saveStateToStorage = (state) => {
 
 export const removeStateFromStorage = (state) => {
   try {
-    localStorage.removeItem('state')
+    localStorage.clear()
   } catch (err) {
-    // bleh
+    // err
   }
 }

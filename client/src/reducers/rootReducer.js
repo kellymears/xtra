@@ -5,8 +5,8 @@ import { person } from './personReducer'
 import { metaNav } from './metaNavReducer'
 
 export default combineReducers({
-  story,
-  person,
-  metaNav,
-  profile,
+  story: story,
+  person: person,
+  metaNav: metaNav,
+  profile: profile,
 })

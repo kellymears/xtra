@@ -8,29 +8,44 @@ var storySchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Person'
   },
+	image: String,
 	body: String,
-  uri: String,
   topics: [{
     type: Schema.Types.ObjectId,
     ref: 'Topic'
   }],
   bookmarks: Number,
-  claps: Number,
+  reactions: [{
+		type: Schema.Types.ObjectId,
+		ref:'Person'
+	}],
   comments: [{
     text: String,
-    postedBy: {
+    author: {
       type: Schema.Types.ObjectId,
       ref: 'Person'
-    }
+    },
+		likes: [{
+			type: Schema.Types.ObjectId,
+			ref: 'Person'
+		}],
+		dislikes: [{
+			type: Schema.Types.ObjectId,
+			ref: 'Person'
+		}],
+		date_created: { type: Date, default: Date.now },
+		date_updated: { type: Date, default: Date.now }
   }],
-  reads: Number,
+	reads: Number,
+	time_read: Number,
   date: {
     created: { type: Date, default: Date.now },
     updated: { type: Date, default: Date.now }
-  }
+  },
+	uri: String,
 })
 
-postSchema.pre('save', function(next) {
+storySchema.pre('save', function(next) {
   this.date.updated = new Date()
   if (!this.date.created)
     this.date.created = this.date.updated

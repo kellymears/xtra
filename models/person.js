@@ -1,46 +1,48 @@
 var Schema = require('mongoose').Schema
 
 var personSchema = new Schema({
+  _id: {
+    type: String,
+    required: true,
+    unique: true
+  },
   username: {
     type: String,
     required: true,
     unique: true
   },
-  password: {
-    type: String,
-    required: true
-  },
   email: {
     type: String,
-    required: true,
     lowercase: true
   },
-  bio: String,
   name: {
     first: String,
     last: String
   },
-  date: {
-    created: {
-      type: Date,
-      default: Date.now
-    },
-    updated: {
-      type: Date,
-      default: Date.now
-    }
+  gender: String,
+  bio: String,
+  picture: String,
+  date_created: {
+    type: Date,
+    default: Date.now
+  },
+  date_updated: {
+    type: Date,
+    default: Date.now
+  },
+  date_accessed: {
+    type: Date,
+    default: Date.now
+  },
+  auth: {
+    id: String,
+    access: String
   }
 })
 
-personSchema.pre('save', function(next) {
-  this.date.updated = new Date()
-  if (!this.date.created)
-    this.date.created = currentDate
+personSchema.virtual('fullName').get(function(next) {
+  return this.name.first + ' ' + this.name.last
   next()
 })
 
-userSchema.virtual('fullName').get(function () {
-  return this.name.first + ' ' + this.name.last
-})
-
-module.exports = userSchema
+module.exports = personSchema

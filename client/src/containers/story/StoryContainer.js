@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-import { getStory, createStory } from "../actions/storyActions"
-import Story from "../components/stories/StoryComponent"
+import { getStory, createStory } from "../../actions/storyActions"
+import Story from "../../components/stories/StoryComponent"
 
 class StoryContainer extends Component {
   componentDidMount(){
@@ -24,8 +24,8 @@ class StoryContainer extends Component {
 }
 
 StoryContainer.propTypes = {
-    getStory: PropTypes.func.isRequired,
-    story: PropTypes.array.isRequired,
+  getStory: PropTypes.func.isRequired,
+  story: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => {

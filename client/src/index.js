@@ -7,7 +7,7 @@ import { store } from './util/store'
 
 import XtraRouter from './util/router'
 
-import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 render(
   <Provider store={store}>

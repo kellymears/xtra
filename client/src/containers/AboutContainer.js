@@ -16,8 +16,6 @@ class AboutContainer extends Component {
     return (
       <Row>
         <Col>
-          <h2>About</h2>
-          <hr/>
           <h4 className="lead">Xtra is currently in very early development using:</h4>
           <br/>
           <ListGroup>

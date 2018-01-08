@@ -1,0 +1,18 @@
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+[contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+[contenteditable] {
+  margin: auto;
+  height:50%!important;
+}
+
+.storyCreateSubmit {
+  margin-top:10em!important;
+  line-height: 60px;
+}

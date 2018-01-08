@@ -9,7 +9,6 @@ import {
 } from 'reactstrap'
 
 const Story = (props) => (
-  <Container>
     <Row>
       <Col>
         <h2>{props.title}</h2>
@@ -19,7 +18,6 @@ const Story = (props) => (
         <hr/>
       </Col>
     </Row>
-  </Container>
 )
 
 export default Story
