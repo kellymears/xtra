@@ -24,10 +24,12 @@ class AboutContainer extends Component {
             <ListGroupItem>Express</ListGroupItem>
             <ListGroupItem>Redux</ListGroupItem>
             <ListGroupItem>Redux Thunk</ListGroupItem>
+            <ListGroupItem>Immutable.js</ListGroupItem>
             <ListGroupItem>Axios</ListGroupItem>
             <ListGroupItem>React</ListGroupItem>
             <ListGroupItem>Auth0</ListGroupItem>
             <ListGroupItem>Reactstrap</ListGroupItem>
+            <ListGroupItem>Slate.js</ListGroupItem>
             <ListGroupItem>React Waypoint</ListGroupItem>
             <ListGroupItem>React Icons</ListGroupItem>
             <ListGroupItem>React Headroom</ListGroupItem>

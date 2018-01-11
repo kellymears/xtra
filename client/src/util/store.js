@@ -50,9 +50,10 @@ const persistedState = loadStateFromStorage()
 const store = createStore(reducer,persistedState,enhancer)
 
 store.subscribe(throttle(() => {
-  if(store.getState().profile) {
+  if(store.getState()) {
     saveStateToStorage({
-      profile: store.getState().profile
+      profile: store.getState().profile,
+      draft: store.getState().draft
     })
   }
 }, 1000))

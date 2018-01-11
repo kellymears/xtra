@@ -1,18 +1,125 @@
-html {
-  min-height: 100%;
+body {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+pre {
+  padding: 10px;
+  background-color: #eee;
+  white-space: pre-wrap;
+}
+
+:not(pre) > code {
+  font-family: monospace;
+  background-color: #eee;
+  padding: 3px;
+}
+
+img {
+  max-width: 100%;
+  max-height: 20em;
+}
+
+img.active {
+  box-shadow: 0 0 0 2px blue;
+}
+
+blockquote {
+  border-left: 2px solid #ddd;
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 10px;
+  color: #aaa;
+  font-style: italic;
+}
+
+blockquote[dir="rtl"] {
+  border-left: none;
+  padding-left: 0;
+  padding-right: 10px;
+  border-right: 2px solid #ddd;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 10px;
+  border: 2px solid #ddd;
+}
+
+input {
+  box-sizing: border-box;
+  font-size: .85em;
+  width: 100%;
+  padding: .5em;
+  border: 2px solid #ddd;
+  background: #fafafa;
+}
+
+input:focus {
+  outline: 0;
+  border-color: blue;
+}
+
+.error {
+  background: #fffae0;
+}
+
+.error .info {
+  background: #fbf1bd;
+  white-space: pre;
+  overflow-x: scroll;
+  margin-bottom: 0;
+}
+
+.editor {
+  margin:3em 0em 3em 0em
+}
+
+.editor > * > * + * {
+  margin-top: 1em;
+}
+
+.toolbar-menu {
   position: relative;
+  padding: 1px 18px 17px;
+  margin: 0 -20px;
+  border-bottom: 2px solid #eee;
+  margin-bottom: 20px;
 }
 
-[contenteditable]:focus {
-    outline: 0px solid transparent;
+.hover-menu {
+  padding: 8px 7px 6px;
+  position: absolute;
+  z-index: 1;
+  top: -10000px;
+  left: -10000px;
+  margin-top: -6px;
+  opacity: 0;
+  background-color: #222;
+  border-radius: 4px;
+  transition: opacity .75s;
 }
 
-[contenteditable] {
-  margin: auto;
-  height:50%!important;
+.hover-menu .button {
+  color: #aaa;
+  margin-right:10px;
 }
 
-.storyCreateSubmit {
-  margin-top:10em!important;
-  line-height: 60px;
+.hover-menu .button svg {
+  position:relative;
+  top:-3px;
+}
+
+.hover-menu .button[data-active="true"] {
+  color: #fff;
+}
+
+.emoji.selected {
+  text-decoration: underline;
 }

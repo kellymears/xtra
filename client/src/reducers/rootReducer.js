@@ -1,12 +1,16 @@
 import { combineReducers } from 'redux'
+import { metaNav } from './metaNavReducer'
 import { profile } from './profileReducer'
+import { draft } from './draftReducer'
+
+/* the following are deprecated/need to be reworked */
 import { story } from './storyReducer'
 import { person } from './personReducer'
-import { metaNav } from './metaNavReducer'
 
 export default combineReducers({
-  story: story,
-  person: person,
   metaNav: metaNav,
   profile: profile,
+  draft: draft,
+  story: story,
+  person: person,
 })

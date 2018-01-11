@@ -4,6 +4,7 @@ export function profile(state = [], action) {
       return {
         ...state,
         data: action.profile,
+        signedOut: false
       }
     case 'SIGN_OUT':
       return {

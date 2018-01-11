@@ -32,7 +32,7 @@ class XtraRouter extends Component {
         <div>
           <MetaNavContainer />
           <TopicNavContainer />
-          <Container>
+          <Container id="appRoot">
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route exact path="/sign-in" component={SignInCallback}/>

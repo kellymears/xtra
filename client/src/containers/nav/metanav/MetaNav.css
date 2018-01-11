@@ -77,12 +77,3 @@
 .MetaNav-title a {
   color:black;
 }
-
-.dropdown-menu.show {
-  top:20px!important;
-  left:-33px!important;
-}
-
-.profilePicture {
-  border-radius: 50%;
-}
