@@ -162,7 +162,6 @@ class SignInCallback extends Component {
     }
   }
   render() {
-    console.log(this.state)
     if(this.state.loading)
       return(<h1>Loading...</h1>)
     if(this.state.newProfile)
@@ -179,8 +178,6 @@ class SignInCallback extends Component {
               <h2>Glad to have you aboard the Good Ship Xtra,
               Captain {this.state.profile.family_name}!</h2>
             </Jumbotron>
-            <h3 className="lead">Pick all the topics you're interested in
-            to fill you homepage with stories you'll love.</h3>
           </Col>
         </Row>
       )

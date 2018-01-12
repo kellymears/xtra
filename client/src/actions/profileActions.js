@@ -1,7 +1,6 @@
 import axios from 'axios'
 import auth0 from 'auth0-js'
 import decode from 'jwt-decode'
-// import Auth from '../util/auth'
 
 const auth = new auth0.WebAuth({
   domain: 'xtrarad.auth0.com',

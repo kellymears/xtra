@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link, withRouter } from 'react-router-dom'
-import { updateMetaNav } from "../../../actions/navActions"
 
-import Auth from '../../../util/auth'
+import { updateMetaNav } from "../../../actions/navActions"
+import { signIn, signOut } from "../../../actions/profileActions"
 
 import {
   Nav,
@@ -23,13 +23,12 @@ import './TopicNav.css'
 class TopicNavContainer extends Component {
   constructor(props){
     super(props)
-    this.auth = new Auth()
   }
   handleSignInClick() {
-    this.auth.login()
+    this.props.signIn()
   }
   handleSignOutClick() {
-    this.auth.logout()
+    this.props.signOut()
   }
   getButtonStyle() {
     console.log(this.props.navState)
@@ -71,5 +70,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateMetaNav: (visible) => dispatch(updateMetaNav(visible)),
+    signIn: () => dispatch(signIn()),
+    signOut: () => dispatch(signOut())
+  }
+}
+
 export default withRouter(connect(mapStateToProps,
-  null)(TopicNavContainer))
+  mapDispatchToProps)(TopicNavContainer))

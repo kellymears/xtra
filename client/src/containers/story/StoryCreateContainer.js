@@ -5,21 +5,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link, withRouter } from 'react-router-dom'
 
-import { createStory } from "../../actions/storyActions"
-import { createDraft, updateDraft } from "../../actions/draftActions"
-
 import { Editor, getEventRange, getEventTransfer } from 'slate-react'
 import { Block, Value } from 'slate'
 import isImage from 'is-image'
 import isUrl from 'is-url'
 
-import { MdFormatBold,
-         MdFormatItalic,
-         MdFormatUnderlined,
-         MdFormatStrikethrough,
-         MdCode,
-         MdFormatSize
-        } from 'react-icons/lib/md/'
+import TextMenu from './TextMenuContainer'
+import initialValue from './initialValue.json'
+
+import { createStory } from "../../actions/storyActions"
+import { createDraft, updateDraft } from "../../actions/draftActions"
 
 import {
   Container,
@@ -30,34 +25,25 @@ import {
 
 import './StoryCreate.css'
 
-const initialValue = {
-    "document": {
-    "nodes": [
-      {
-        "object": "block",
-        "type": "heading1",
-        "nodes": [
-          {
-            "object": "text",
-            "leaves": [
-              {
-                "text": "Welcome to the Xtra Editor. Select some text, drag and drop an image, or insert some Emoji to get started 🙌"
-              }
-            ]
-          },
-        ]
-      }
-    ]
-  }
-}
-
-const root = document.getElementById('app')
-
 const EMOJIS = [
   '😃', '😬', '😂', '😅', '😆', '😍',
   '😱', '👋', '👏', '👍', '🙌', '👌',
   '🙏', '👻', '🍔', '🍑', '🍆', '🔑',
 ]
+
+const schema = {
+  document: {
+    last: { types: ['paragraph'] },
+    normalize: (change, reason, { node, child }) => {
+      switch (reason) {
+        case 'last_child_type_invalid': {
+          const paragraph = Block.create('paragraph')
+          return change.insertNodeByKey(node.key, node.nodes.size, paragraph)
+        }
+      }
+    }
+  }
+}
 
 const noop = e => e.preventDefault()
 
@@ -72,128 +58,17 @@ function insertImage(change, src, target) {
   })
 }
 
-/**
- * The menu.
- *
- * @type {Component}
- */
-
-class Menu extends React.Component {
-
-  /**
-   * Check if the current selection has a mark with `type` in it.
-   *
-   * @param {String} type
-   * @return {Boolean}
-   */
-
-  hasMark(type) {
-    const { value } = this.props
-    return value.activeMarks.some(mark => mark.type == type)
-  }
-
-  /**
-   * When a mark button is clicked, toggle the current mark.
-   *
-   * @param {Event} event
-   * @param {String} type
-   */
-
-  onClickMark(event, type) {
-    const { value, onChange } = this.props
-    event.preventDefault()
-    const change = value.change().toggleMark(type)
-    onChange(change)
-  }
-
-  /**
-   * Render a mark-toggling toolbar button.
-   *
-   * @param {String} type
-   * @param {String} icon
-   * @return {Element}
-   */
-
-  renderMarkButton(type, icon) {
-    const isActive = this.hasMark(type)
-    const onMouseDown = event => this.onClickMark(event, type)
-    switch(icon) {
-      case "format_bold":
-        return (
-          <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
-            <span className="material-icons"><MdFormatBold /></span>
-          </span>
-        )
-      case "format_underlined":
-        return (
-          <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
-            <span className="material-icons"><MdFormatUnderlined /></span>
-          </span>
-        )
-      case "format_italic":
-        return (
-          <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
-            <span className="material-icons"><MdFormatItalic /></span>
-          </span>
-        )
-        case "format_code":
-          return (
-            <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
-              <span className="material-icons"><MdCode /></span>
-            </span>
-          )
-        case "format_heading1":
-      return (
-        <span className="button" onMouseDown={onMouseDown} data-active={isActive}>
-          <MdFormatSize />
-        </span>
-      )
-    }
-  }
-
-  /**
-   * Render.
-   *
-   * @return {Element}
-   */
-
-   render() {
-     return ReactDOM.createPortal(
-         <div className="menu hover-menu" ref={this.props.menuRef}>
-           {this.renderMarkButton('heading1', 'format_heading1')}
-           {this.renderMarkButton('bold', 'format_bold')}
-           {this.renderMarkButton('italic', 'format_italic')}
-           {this.renderMarkButton('underlined', 'format_underlined')}
-           {this.renderMarkButton('code', 'format_code')}
-         </div>,
-         root
-      )
-   }
-
-}
-
-
-/**
- * The hovering menu example.
- *
- * @type {Component}
- */
-
 class StoryCreateContainer extends React.Component {
 
-  /**
-   * Deserialize the raw initial value.
-   *
-   * @type {Object}
-   */
-
-  state = {
-    value: Value.fromJSON(initialValue)
+  constructor(props) {
+    super(props)
+    if(!this.props.draft) {
+      this.state = { value: Value.fromJSON(initialValue) }
+      this.props.updateDraft(initialValue)
+    } else {
+      this.state = { value: Value.fromJSON(JSON.parse(this.props.draft)) }
+    }
   }
-
-  /**
-   * On update, update the menu.
-   */
 
   componentDidMount = () => {
     this.updateMenu()
@@ -202,10 +77,6 @@ class StoryCreateContainer extends React.Component {
   componentDidUpdate = () => {
     this.updateMenu()
   }
-
-  /**
-   * Update the menu's absolute position.
-   */
 
   updateMenu = () => {
     const { value } = this.state
@@ -225,28 +96,27 @@ class StoryCreateContainer extends React.Component {
     menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`
   }
 
-  /**
-   * On change.
-   *
-   * @param {Change} change
-   */
-
   onChange = ({ value }) => {
+    if (value.document != this.state.value.document) {
+      let content = JSON.stringify(value.toJSON())
+      this.props.updateDraft(content)
+    }
     this.setState({ value })
   }
 
-  /**
-   * Save the `menu` ref.
-   *
-   * @param {Menu} menu
-   */
+  onSave = (e) => {
+    e.preventDefault()
+    let editorState = this.state.value
+    let content = JSON.stringify(editorState.toJSON())
+    console.log('save called')
+    console.log(content)
+  }
 
   menuRef = (menu) => {
     this.menu = menu
   }
 
   /* EMOJI !!! */
-
   renderToolbar = () => {
     return (
       <div className="menu toolbar-menu">
@@ -277,13 +147,7 @@ class StoryCreateContainer extends React.Component {
 
   }
 
-  /**
-   * Handle drag and drop images
-   *
-   * @param {onDropOrPaste} onDropOrPaste
-   */
-
-   renderNode = (props) => {
+  renderNode = (props) => {
     const { attributes, children, node, isSelected } = props
     switch (node.type) {
       case 'paragraph': {
@@ -304,7 +168,7 @@ class StoryCreateContainer extends React.Component {
           <span
             className={`emoji ${isSelected ? 'selected' : ''}`}
             {...props.attributes}
-            contentEditable={true}
+            contentEditable={false}
             onDrop={noop}
           >
             {code}
@@ -345,42 +209,31 @@ class StoryCreateContainer extends React.Component {
     }
   }
 
-  /**
-   * Render.
-   *
-   * @return {Element}
-   */
-
-   render() {
-     return (
-       <div>
-         <Menu
-           menuRef={this.menuRef}
+  render() {
+   return (
+     <form onSubmit={ this.onSave }>
+       <TextMenu
+         menuRef={this.menuRef}
+         value={this.state.value}
+         onChange={this.onChange}
+       />
+       <div className="editor">
+         <Editor
+           placeholder="Tell me a story 😍👋🎉..."
            value={this.state.value}
+           schema={schema}
            onChange={this.onChange}
+           renderMark={this.renderMark}
+           onDrop={this.onDropOrPaste}
+           onPaste={this.onDropOrPaste}
+           renderNode={this.renderNode}
          />
-         <div className="editor">
-           <Editor
-             placeholder="Tell me a story 😍👋🎉..."
-             value={this.state.value}
-             onChange={this.onChange}
-             renderMark={this.renderMark}
-             onDrop={this.onDropOrPaste}
-             onPaste={this.onDropOrPaste}
-             renderNode={this.renderNode}
-           />
-         </div>
-         <h5>Currently supported Emoji: {this.renderToolbar()}</h5>
        </div>
-     )
-   }
-
-  /**
-   * Render a Slate mark.
-   *
-   * @param {Object} props
-   * @return {Element}
-   */
+       <h5>Click a currently supported Emoji to insert:<br/>{this.renderToolbar()}</h5>
+       <button className="btn btn-outline-secondary" type="submit">Publish</button>
+     </form>
+   )
+  }
 
   renderMark = (props) => {
     const { children, mark } = props
@@ -394,4 +247,17 @@ class StoryCreateContainer extends React.Component {
   }
 }
 
-export default StoryCreateContainer
+const mapStateToProps = (state) => {
+  return {
+    draft: state.draft.content
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateDraft: (draft) => dispatch(updateDraft(draft)),
+  }
+}
+
+export default connect(mapStateToProps,
+  mapDispatchToProps)(StoryCreateContainer)
