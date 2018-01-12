@@ -1,13 +1,13 @@
-#Xtra: a non-exploitative Medium
+# Xtra: a non-exploitative Medium
 
 `iHaveNoIdeaWhatImDoingDog.gif`
 
 * client must be run at localhost:3000 for authentication to work.
 * client expects server to run at localhost:8888. that is set as its proxy.
 
-##Project Status
+## Project Status
 
-###Authentication:
+### Authentication:
 
 Currently using Auth0 for authentication.
 
@@ -19,21 +19,21 @@ Callback (`./containers/profile/SignInCallback`) functions for _the most part_. 
 
 2. `./containers/profile/SignInCallback.js` does not fully use the action/reducer for profiles. This means there is a duplicate instantiation of the class Auth0 provides for authentication. It doesn't break anything, but it's ugly and against best practices and needs to be refactored.
 
-###Containers
+### Containers
 
-####home/Home.js
+#### home/Home.js
 
 Very simple. Renders two different sets of components based on user status (logged in / logged out). Note that if anything gets fucked up in localstorage, i have gotten undefined errors in the app. Clearing local storage fixes it, but there should clearly be additional handling to prevent this from happening.
 
-####nav/metanav and nav/topicnav
+#### nav/metanav and nav/topicnav
 
 Metanav and Topicnav also have conditional logic based on user status. Metanav provides log in and log out functionality, as well as the withRouter link to create a new story. TopicNav is just a simple navigation element. In the future I would like it to organize stories by Topic. I have not developed any handling for topics because I don't want to dig a deep hole for no reason, but I am trying to make space for it in terms of client architecture.
 
-####profile/SignInCallback and profile/SignOutCallback
+#### profile/SignInCallback and profile/SignOutCallback
 
 I wrote about these in **Authentication** section (above). The only thing I would add is that all usage of `profile` on the react side is to designate a `person` who is logged in. There is no `profile` designation on the Express side.   
 
-####story/...
+#### story/...
 
 `StoryCreateContainer.js` is where I have put most of my energy.
 
@@ -45,7 +45,7 @@ Emojis are really cool but can not be inserted inline into a headline element an
 
 There is also drag and drop support for images. Images are saved as data objects in redux and persist in localStorage. I do not know if it is acceptable to store images as data in MongoDB, but I assume not.
 
-####people/...
+#### people/...
 
 There is no container for people handling. All that exists are the outdated components.
 
