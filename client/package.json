@@ -24,6 +24,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "slate": "^0.32.0",
+    "slate-html-serializer": "^0.5.1",
     "slate-react": "^0.11.0",
     "slate-trailing-block": "^0.4.0"
   },

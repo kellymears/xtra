@@ -5,10 +5,11 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Link, withRouter } from 'react-router-dom'
 
-import { Editor, getEventRange, getEventTransfer } from 'slate-react'
 import { Block, Value } from 'slate'
+import { Editor, getEventRange, getEventTransfer } from 'slate-react'
 import isImage from 'is-image'
 import isUrl from 'is-url'
+import Html from 'slate-html-serializer'
 
 import TextMenu from './TextMenuContainer'
 import initialValue from './initialValue.json'
@@ -31,9 +32,11 @@ const EMOJIS = [
   '🙏', '👻', '🍔', '🍑', '🍆', '🔑',
 ]
 
+/* schema to ensure there is always a trailing paragraph
+   following images and embeds */
 const schema = {
   document: {
-    last: { types: ['paragraph'] },
+    last: { types: ['paragraph','heading1'] },
     normalize: (change, reason, { node, child }) => {
       switch (reason) {
         case 'last_child_type_invalid': {
@@ -44,6 +47,90 @@ const schema = {
     }
   }
 }
+
+/* serialization for saving html to database for presentation
+and deserialization of html from database in the event of
+edits */
+const BLOCK_TAGS = {
+  p: 'paragraph',
+  h1: 'heading1',
+  pre: 'code',
+  span: 'emoji',
+}
+
+const INLINE_TAGS = {
+  span: 'emoji'
+}
+
+const MARK_TAGS = {
+  em: 'italic',
+  strong: 'bold',
+  u: 'underline',
+}
+
+const rules = [
+  {
+    deserialize(el, next) {
+      const type = BLOCK_TAGS[el.tagName.toLowerCase()]
+      if (!type) return
+      return {
+        object: 'block',
+        type: type,
+        nodes: next(el.childNodes)
+      }
+    },
+    serialize(obj, children) {
+      if (obj.object != 'block') return
+      switch (obj.type) {
+        case 'code': return <pre><code>{children}</code></pre>
+        case 'paragraph': return <p>{children}</p>
+        case 'heading1': return <h1>{children}</h1>
+        case 'emoji': return <p><span className="emoji">{children}</span></p>
+      }
+    }
+  },
+  {
+    deserialize(el, next) {
+      const type = MARK_TAGS[el.tagName.toLowerCase()]
+      if (!type) return
+      return {
+        object: 'mark',
+        type: type,
+        nodes: next(el.childNodes)
+      }
+    },
+    serialize(obj, children) {
+      if (obj.object != 'mark') return
+      switch (obj.type) {
+        case 'bold': return <strong>{children}</strong>
+        case 'italic': return <em>{children}</em>
+        case 'underline': return <u>{children}</u>
+      }
+    }
+  },
+  {
+    deserialize(el, next) {
+      const type = INLINE_TAGS[el.tagName.toLowerCase()]
+      if (!type) return
+      return {
+        kind: 'inline',
+        type: type,
+        nodes: next(el.childNodes)
+      }
+    },
+    serialize(object, children) {
+      if (object.kind != 'inline') return
+      switch (object.type) {
+        case 'link':
+          return <a href={object.data.get('href')}>{children}</a>
+        case 'emoji':
+          return <span className="emoji">{object.data.get('code')}</span>
+      }
+    }
+  }
+]
+
+const html = new Html({ rules })
 
 const noop = e => e.preventDefault()
 
@@ -66,7 +153,7 @@ class StoryCreateContainer extends React.Component {
       this.state = { value: Value.fromJSON(initialValue) }
       this.props.updateDraft(initialValue)
     } else {
-      this.state = { value: Value.fromJSON(JSON.parse(this.props.draft)) }
+      this.state = { value: Value.fromJSON(this.props.draft) }
     }
   }
 
@@ -98,7 +185,7 @@ class StoryCreateContainer extends React.Component {
 
   onChange = ({ value }) => {
     if (value.document != this.state.value.document) {
-      let content = JSON.stringify(value.toJSON())
+      let content = value.toJSON()
       this.props.updateDraft(content)
     }
     this.setState({ value })
@@ -106,10 +193,9 @@ class StoryCreateContainer extends React.Component {
 
   onSave = (e) => {
     e.preventDefault()
-    let editorState = this.state.value
-    let content = JSON.stringify(editorState.toJSON())
+    const storyHTML = html.serialize(this.state.value)
     console.log('save called')
-    console.log(content)
+    console.log(storyHTML)
   }
 
   menuRef = (menu) => {
@@ -117,7 +203,7 @@ class StoryCreateContainer extends React.Component {
   }
 
   /* EMOJI !!! */
-  renderToolbar = () => {
+  renderEmojiSelector = () => {
     return (
       <div className="menu toolbar-menu">
         {EMOJIS.map((emoji, i) => {
@@ -147,37 +233,7 @@ class StoryCreateContainer extends React.Component {
 
   }
 
-  renderNode = (props) => {
-    const { attributes, children, node, isSelected } = props
-    switch (node.type) {
-      case 'paragraph': {
-        return <p {...attributes}>{children}</p>
-      }
-      case 'image': {
-        const src = node.data.get('src')
-        const className = isSelected ? 'active' : null
-        const style = { display: 'block' }
-        return (
-          <img src={src} className={className} style={style} {...attributes} />
-        )
-      }
-      case 'emoji': {
-        const { data } = node
-        const code = data.get('code')
-        return (
-          <span
-            className={`emoji ${isSelected ? 'selected' : ''}`}
-            {...props.attributes}
-            contentEditable={false}
-            onDrop={noop}
-          >
-            {code}
-          </span>
-        )
-      }
-    }
-  }
-
+  /* images!! */
   onDropOrPaste = (event, change, editor) => {
     event.preventDefault()
     const target = getEventRange(event, change.value)
@@ -209,6 +265,48 @@ class StoryCreateContainer extends React.Component {
     }
   }
 
+  renderWordCount = () => {
+    const wordCount = this.state.value.document.text.split(' ').length
+    return wordCount
+  }
+
+  renderNode = (props) => {
+    const { attributes, children, node, isSelected } = props
+    switch (node.type) {
+      case 'paragraph': {
+        return <p {...attributes}>{children}</p>
+      }
+      case 'heading1': {
+        return <h1 {...attributes}>{children}</h1>
+      }
+      case 'code': {
+        return <pre><code {...attributes}>{children}</code></pre>
+      }
+      case 'image': {
+        const src = node.data.get('src')
+        const className = isSelected ? 'active' : null
+        const style = { display: 'block' }
+        return (
+          <img src={src} className={className} style={style} {...attributes} />
+        )
+      }
+      case 'emoji': {
+        const { data } = node
+        const code = data.get('code')
+        return (
+          <span
+            className={`emoji ${isSelected ? 'selected' : ''}`}
+            {...props.attributes}
+            contentEditable={false}
+            onDrop={noop}
+          >
+            {code}
+          </span>
+        )
+      }
+    }
+  }
+
   render() {
    return (
      <form onSubmit={ this.onSave }>
@@ -229,8 +327,10 @@ class StoryCreateContainer extends React.Component {
            renderNode={this.renderNode}
          />
        </div>
-       <h5>Click a currently supported Emoji to insert:<br/>{this.renderToolbar()}</h5>
+       <h5>Click a currently supported Emoji to insert:<br/>{this.renderEmojiSelector()}</h5>
        <button className="btn btn-outline-secondary" type="submit">Publish</button>
+       <br/><br/>
+       <p>Word count: {this.renderWordCount()}</p>
      </form>
    )
   }
@@ -239,10 +339,8 @@ class StoryCreateContainer extends React.Component {
     const { children, mark } = props
     switch (mark.type) {
       case 'bold': return <strong>{children}</strong>
-      case 'code': return <code>{children}</code>
       case 'italic': return <em>{children}</em>
       case 'underlined': return <u>{children}</u>
-      case 'heading1': return <h1>{children}</h1>
     }
   }
 }
@@ -255,6 +353,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    createStory: (story) => dispatch(createStory(story)),
     updateDraft: (draft) => dispatch(updateDraft(draft)),
   }
 }
