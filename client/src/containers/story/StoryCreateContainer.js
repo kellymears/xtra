@@ -15,7 +15,7 @@ import initialValue from './slate/initialValue.json'
 import { EMOJIS } from './slate/emojis'
 import { schema } from './slate/schema'
 import { html } from './slate/serialize'
-import insertImage from './slate/images'
+import { insertImage } from './slate/images'
 
 import { createStory } from "../../actions/storyActions"
 import { createDraft, updateDraft } from "../../actions/draftActions"
@@ -52,6 +52,7 @@ class StoryCreateContainer extends React.Component {
   }
 
   updateMenu = () => {
+
     const { value } = this.state
     const menu = this.menu
     if (!menu) return
@@ -92,14 +93,15 @@ class StoryCreateContainer extends React.Component {
   renderEmojiSelector = () => {
     return (
       <div className="menu toolbar-menu">
-        {EMOJIS.map((emoji, i) => {
+        { EMOJIS.map((emoji, i) => {
           const onMouseDown = e => this.onClickEmoji(e, emoji)
           return (
             <span key={i} className="button" onMouseDown={onMouseDown}>
               <span className="material-icons">{emoji}</span>
             </span>
           )
-        })}
+         })
+       }
       </div>
     )
   }
@@ -119,8 +121,8 @@ class StoryCreateContainer extends React.Component {
 
   }
 
-  /* images!! */
   onDropOrPaste = (event, change, editor) => {
+
     event.preventDefault()
     const target = getEventRange(event, change.value)
     if (!target && event.type == 'drop') return
@@ -139,7 +141,6 @@ class StoryCreateContainer extends React.Component {
             c.call(insertImage, reader.result, target)
           })
         })
-
         reader.readAsDataURL(file)
       }
     }
@@ -151,8 +152,8 @@ class StoryCreateContainer extends React.Component {
     }
   }
 
-  renderWordCount = () => {
-    const wordCount = this.state.value.document.text.split(' ').length
+  getWordCount = () => {
+    const wordCount = this.state.value.document.text.split(' ').length - 1
     return wordCount
   }
 
@@ -195,12 +196,14 @@ class StoryCreateContainer extends React.Component {
 
   render() {
    return (
+
      <form onSubmit={ this.onSave }>
        <TextMenu
          menuRef={this.menuRef}
          value={this.state.value}
          onChange={this.onChange}
        />
+
        <div className="editor">
          <Editor
            placeholder="Tell me a story 😍👋🎉..."
@@ -213,10 +216,14 @@ class StoryCreateContainer extends React.Component {
            renderNode={this.renderNode}
          />
        </div>
-       <h5>Click a currently supported Emoji to insert:<br/>{this.renderEmojiSelector()}</h5>
+
+       <h5>Click a currently supported Emoji to insert:<br/>
+       {this.renderEmojiSelector()}</h5>
+
        <button className="btn btn-outline-secondary" type="submit">Publish</button>
        <br/><br/>
-       <p>Word count: {this.renderWordCount()}</p>
+       
+       <p>Word count: {this.getWordCount()}</p>
      </form>
    )
   }

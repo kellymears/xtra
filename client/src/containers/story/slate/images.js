@@ -1,4 +1,4 @@
-function insertImage(change, src, target) {
+export function insertImage(change, src, target) {
   if (target) {
     change.select(target)
   }
