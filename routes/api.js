@@ -5,6 +5,17 @@ const mongoose = require('mongoose')
 const { User, Post, Person, Story } = require('../models')
 
 /* persons/profiles */
+router.get('/person/get/:id', function(req,res){
+  let id = decodeURIComponent(req.params.id)
+  console.log(id)
+  Person.findOne({ _id: id })
+  .exec(function(err,person) {
+    if(err) return res.send(err)
+    if(person) return res.json({ person: person })
+    return res.json(null)
+  })
+})
+
 router.get('/person/check/:username', function(req,res){
   Person.findOne({ username: req.params.username })
   .exec(function(err,person) {
@@ -61,7 +72,7 @@ router.post('/person/update/', function(req,res){
 /* stories */
 router.post('/story/create', function(req,res){
   var newStory = Story({
-    _id: new mongoose.Types.ObjectId(),
+    _id: req.body._id,
     title: req.body.title,
     subtitle: req.body.subtitle,
     body: req.body.body,
@@ -75,9 +86,7 @@ router.post('/story/create', function(req,res){
 })
 
 router.get('/story/get/:person/:story', function(req,res){
-  console.log('api request for story data received: ' + req.params)
-  console.log(req.params)
-  Post.find({
+  Story.find({
     title: decodeURIComponent(req.params.story)
   }).populate({
     path: 'author',
@@ -86,22 +95,20 @@ router.get('/story/get/:person/:story', function(req,res){
     }
   }).exec(function(err, story) {
     console.log(story[0])
-    res.json(story[0])
+    if(err) return console.log(err)
+    return res.json(story[0])
+  })
+})
+
+router.get('/story/get/all', function(req,res){
+  console.log('api request for all stories')
+  Story.find().populate('author').exec(function(err, stories) {
+    console.log(stories)
+    res.json(stories)
   })
 })
 
 /* junk after here */
-
-router.get('/person/get/:id', function(req,res){
-  let id = decodeURIComponent(req.params.id)
-  console.log(id)
-  Person.findOne({ _id: id })
-  .exec(function(err,person) {
-    if(err) res.send(err)
-    if(person) return res.json({ person: person })
-    return res.json(null)
-  })
-})
 
 router.get('/story/get/:person/:story', function(req,res){
   console.log('api request for post data received')

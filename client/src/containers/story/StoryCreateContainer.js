@@ -39,7 +39,7 @@ class StoryCreateContainer extends React.Component {
   }
 
   componentWillMount() {
-    if(!this.props.draft) {
+    if(!this.props.draft.body) {
       console.log('no draft detected :(')
       this.state = { value: Value.fromJSON(initialValue) }
       this.props.createDraft({

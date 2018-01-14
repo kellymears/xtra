@@ -2,7 +2,7 @@ var Schema = require('mongoose').Schema
 
 var personSchema = new Schema({
   _id: {
-    type: Schema.Types.ObjectId,
+    type: String,
     required: true,
     unique: true
   },

@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-function constructURI(draft,method) {
+function constructURI(payload,method) {
   return '/api/story/' + method + '/' +
-          draft.person + '/' + draft.title
+          payload.person + '/' + payload.title
 }
 
 function gotStory(story) {
@@ -14,8 +14,10 @@ function gotStory(story) {
 
 export function getStory(payload) {
   return (dispatch) => {
+    console.log(payload)
     axios.get(constructURI(payload,"get"))
       .then(response => {
+        console.log(response)
         dispatch(gotStory(response.data))
       })
   }

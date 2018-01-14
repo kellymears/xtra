@@ -8,13 +8,17 @@ import {
   Button
 } from 'reactstrap'
 
+function renderMarkup(html) {
+  return {__html: html};
+}
+
 const Story = (props) => (
     <Row>
       <Col>
         <h2>{props.title}</h2>
         <h3>{props.subtitle}</h3>
         <hr/>
-        {props.body}
+        <div dangerouslySetInnerHTML={renderMarkup(props.body)} />
         <hr/>
       </Col>
     </Row>

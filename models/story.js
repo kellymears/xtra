@@ -5,7 +5,7 @@ var storySchema = new Schema({
 	title: String,
 	subtitle: String,
 	author: {
-    type: Schema.Types.ObjectId,
+    type: String,
     ref: 'Person'
   },
 	image: String,

@@ -14,15 +14,16 @@ class Stories extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      posts: []
+      stories: []
     }
   }
   componentDidMount() {
-    axios.get('/api/posts/get')
+    axios.get('/api/story/get/all')
       .then(response => {
          this.setState({
-           posts: response.data
+           stories: response.data
          })
+         console.log(response.data)
       })
   }
   render() {
@@ -32,7 +33,7 @@ class Stories extends Component {
           <h4>Stories</h4>
           <hr/>
           {
-            this.state.posts.map(({title, subtitle, author}) => {
+            this.state.stories.map(({title, subtitle, author}) => {
               return <p key={title}>
               <Link to={`/@${author.username}/${title}`}>{title}</Link> - {subtitle}</p>
             })

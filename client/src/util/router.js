@@ -39,7 +39,7 @@ class XtraRouter extends Component {
               <Route exact path="/sign-out" component={SignOutCallback}/>
               <Route exact path="/create" component={StoryCreateContainer} />
               <Route exact path="/about" component={AboutContainer}/>
-              <Route path="/@:person/:story" component={StoryContainer}/>
+              <Route path="/@:person/:title" component={StoryContainer}/>
               <Route path="/stories" component={Stories}/>
               <Route path="/people" component={People}/>
               <Route path="/@:person" component={Person}/>
