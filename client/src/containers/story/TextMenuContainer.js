@@ -11,7 +11,7 @@ import { createDraft, updateDraft } from "../../actions/draftActions"
 import { Editor, getEventRange, getEventTransfer } from 'slate-react'
 import { Block, Value } from 'slate'
 
-import initialValue from './initialValue.json'
+import initialValue from './slate/initialValue.json'
 
 import {
   Container,
