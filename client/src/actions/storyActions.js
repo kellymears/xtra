@@ -13,10 +13,13 @@ function createdStory(story) {
   }
 }
 
-export function createStory(story) {
+export function createStory(payload) {
   console.log('createStory action called')
   return (dispatch) => {
-    dispatch(createdStory(story))
+    axios.post(constructURI(payload,"post"))
+      .then(response => {
+        dispatch(createdStory(payload))
+      })
   }
 }
 

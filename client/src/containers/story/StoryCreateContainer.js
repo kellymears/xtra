@@ -68,6 +68,7 @@ class StoryCreateContainer extends React.Component {
     menu.style.opacity = 1
     menu.style.top = `${rect.top + window.scrollY - menu.offsetHeight}px`
     menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`
+
   }
 
   onChange = ({ value }) => {
@@ -82,7 +83,8 @@ class StoryCreateContainer extends React.Component {
     e.preventDefault()
     const storyHTML = html.serialize(this.state.value)
     console.log('save called')
-    console.log(storyHTML)
+    console.log(storyHTML,this.props.profile.username)
+    // this.props.createStory(storyHTML,)
   }
 
   menuRef = (menu) => {
@@ -222,7 +224,7 @@ class StoryCreateContainer extends React.Component {
 
        <button className="btn btn-outline-secondary" type="submit">Publish</button>
        <br/><br/>
-       
+
        <p>Word count: {this.getWordCount()}</p>
      </form>
    )
@@ -240,7 +242,8 @@ class StoryCreateContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    draft: state.draft.content
+    draft: state.draft.content,
+    profile: state.profile.data
   }
 }
 

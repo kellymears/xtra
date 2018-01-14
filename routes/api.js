@@ -4,33 +4,6 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const { User, Post, Person, Story } = require('../models')
 
-router.get('/person/get/:id', function(req,res){
-  let id = decodeURIComponent(req.params.id)
-  console.log(id)
-  Person.findOne({ _id: id })
-  .exec(function(err,person) {
-    if(err) res.send(err)
-    if(person) return res.json({ person: person })
-    return res.json(null)
-  })
-})
-
-router.get('/story/get/:person/:story', function(req,res){
-  console.log('api request for post data received')
-  console.log(req.params)
-  Post.find({
-    title: decodeURIComponent(req.params.story)
-  }).populate({
-    path: 'author',
-    match: {
-      username: req.params.person
-    }
-  }).exec(function(err, story) {
-    console.log(story[0])
-    res.json(story[0])
-  })
-})
-
 router.get('/person/check/:username', function(req,res){
   Person.findOne({ username: req.params.username })
   .exec(function(err,person) {
@@ -66,22 +39,6 @@ router.post('/person/create/', function(req,res){
   })
 })
 
-router.get('/story/get/:person/:story', function(req,res){
-  console.log('api request for story data received: ' + req.params)
-  console.log(req.params)
-  Post.find({
-    title: decodeURIComponent(req.params.story)
-  }).populate({
-    path: 'author',
-    match: {
-      username: req.params.person
-    }
-  }).exec(function(err, story) {
-    console.log(story[0])
-    res.json(story[0])
-  })
-})
-
 router.post('/person/update/', function(req,res){
   Person.findOneAndUpdate({ _id: req.body.id },
     { $set: {
@@ -100,7 +57,50 @@ router.post('/person/update/', function(req,res){
   )
 })
 
+router.get('/story/get/:person/:story', function(req,res){
+  console.log('api request for story data received: ' + req.params)
+  console.log(req.params)
+  Post.find({
+    title: decodeURIComponent(req.params.story)
+  }).populate({
+    path: 'author',
+    match: {
+      username: req.params.person
+    }
+  }).exec(function(err, story) {
+    console.log(story[0])
+    res.json(story[0])
+  })
+})
+
 /* junk after here */
+
+router.get('/person/get/:id', function(req,res){
+  let id = decodeURIComponent(req.params.id)
+  console.log(id)
+  Person.findOne({ _id: id })
+  .exec(function(err,person) {
+    if(err) res.send(err)
+    if(person) return res.json({ person: person })
+    return res.json(null)
+  })
+})
+
+router.get('/story/get/:person/:story', function(req,res){
+  console.log('api request for post data received')
+  console.log(req.params)
+  Post.find({
+    title: decodeURIComponent(req.params.story)
+  }).populate({
+    path: 'author',
+    match: {
+      username: req.params.person
+    }
+  }).exec(function(err, story) {
+    console.log(story[0])
+    res.json(story[0])
+  })
+})
 
 router.get('/posts/get', function(req,res){
   console.log('api request for post data received')
