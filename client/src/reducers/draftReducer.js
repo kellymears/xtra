@@ -3,12 +3,24 @@ export function draft(state = [], action) {
     case 'CREATE_DRAFT':
       return {
         ...state,
-        content: action.draft
+        title: action.title,
+        subtitle: action.subtitle,
+        body: action.body
       }
-    case 'UPDATE_DRAFT':
+    case 'UPDATE_DRAFT_BODY':
       return {
         ...state,
-        content: action.draft,
+        body: action.body,
+      }
+    case 'UPDATE_DRAFT_TITLE':
+      return {
+        ...state,
+        title: action.title,
+      }
+    case 'UPDATE_DRAFT_SUBTITLE':
+      return {
+        ...state,
+        subtitle: action.subtitle,
       }
     default:
       return state

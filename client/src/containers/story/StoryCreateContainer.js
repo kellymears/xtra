@@ -18,7 +18,7 @@ import { html } from './slate/serialize'
 import { insertImage } from './slate/images'
 
 import { createStory } from "../../actions/storyActions"
-import { createDraft, updateDraft } from "../../actions/draftActions"
+import { createDraft, updateDraftState } from "../../actions/draftActions"
 
 import {
   Container,
@@ -35,21 +35,33 @@ class StoryCreateContainer extends React.Component {
 
   constructor(props) {
     super(props)
-    if(!this.props.draft) {
-      this.state = { value: Value.fromJSON(initialValue) }
-      this.props.updateDraft(initialValue)
-    } else {
-      this.state = { value: Value.fromJSON(this.props.draft) }
-    }
     this.onInputChange = this.onInputChange.bind(this)
     this.onSave = this.onSave.bind(this)
   }
 
-  componentDidMount = () => {
+  componentWillMount() {
+    if(!this.props.draft) {
+      console.log('no draft detected :(')
+      this.state = { value: Value.fromJSON(initialValue) }
+      this.props.createDraft({
+        title: 'Title',
+        subtitle: 'Subtitle',
+        body: initialValue
+      })
+    } else {
+      this.setState({
+        title: this.props.draft.title,
+        subtitle: this.props.draft.subtitle,
+        value: Value.fromJSON(this.props.draft.body)
+      })
+    }
+  }
+
+  componentDidMount() {
     this.updateMenu()
   }
 
-  componentDidUpdate = () => {
+  componentDidUpdate() {
     this.updateMenu()
   }
 
@@ -75,11 +87,12 @@ class StoryCreateContainer extends React.Component {
 
   onInputChange(e) {
     this.setState({ [e.target.name]: e.target.value})
+    this.props.updateDraftState({ [e.target.name]: e.target.value })
   }
 
   onSlateChange = ({ value }) => {
     if (value.document != this.state.value.document)
-      this.props.updateDraft(value.toJSON())
+      this.props.updateDraftState({ body: value.toJSON() })
     this.setState({ value })
   }
 
@@ -255,15 +268,15 @@ class StoryCreateContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    draft: state.draft.content,
+    draft: state.draft,
     profile: state.profile.data
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    createStory: (story) => dispatch(createStory(story)),
-    updateDraft: (draft) => dispatch(updateDraft(draft)),
+    createDraft: (story) => dispatch(createDraft(story)),
+    updateDraftState: (draft) => dispatch(updateDraftState(draft)),
   }
 }
 

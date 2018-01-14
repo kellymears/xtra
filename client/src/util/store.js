@@ -51,6 +51,7 @@ const store = createStore(reducer,persistedState,enhancer)
 
 store.subscribe(throttle(() => {
   if(store.getState()) {
+    console.log(store.getState().draft)
     saveStateToStorage({
       profile: store.getState().profile,
       draft: store.getState().draft

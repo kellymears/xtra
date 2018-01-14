@@ -1,20 +1,40 @@
 export function createDraft(draft) {
   return {
     type: 'CREATE_DRAFT',
-    draft: draft
+    title: draft.title,
+    subtitle: draft.subtitle,
+    body: draft.body,
   }
 }
 
-function updateDraftState(draft) {
-  return {
-    type: 'UPDATE_DRAFT',
-    draft: draft
+export function updateDraftState(draft) {
+  return (dispatch) => {
+    if(draft.body)
+      dispatch(updateDraftBody(draft.body))
+    if(draft.title)
+      dispatch(updateDraftTitle(draft.title))
+    if(draft.subtitle)
+      dispatch(updateDraftSubtitle(draft.subtitle))
   }
 }
 
-export function updateDraft(draft) {
+function updateDraftTitle(title) {
   return {
-    type: 'UPDATE_DRAFT',
-    draft: draft
+    type: 'UPDATE_DRAFT_TITLE',
+    title: title
+  }
+}
+
+function updateDraftSubtitle(subtitle) {
+  return {
+    type: 'UPDATE_DRAFT_SUBTITLE',
+    subtitle: subtitle
+  }
+}
+
+function updateDraftBody(body) {
+  return {
+    type: 'UPDATE_DRAFT_BODY',
+    body: body
   }
 }
