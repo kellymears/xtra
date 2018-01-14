@@ -87,7 +87,7 @@ class StoryCreateContainer extends React.Component {
 
   onInputChange(e) {
     this.setState({ [e.target.name]: e.target.value})
-    this.props.updateDraftState({ [e.target.name]: e.target.value })
+    this.props.updateDraft({ [e.target.name]: e.target.value })
   }
 
   onSlateChange = ({ value }) => {
