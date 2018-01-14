@@ -41,6 +41,9 @@ class StoryCreateContainer extends React.Component {
     } else {
       this.state = { value: Value.fromJSON(this.props.draft) }
     }
+    this.onTitleChange = this.onTitleChange.bind(this)
+    this.onSubtitleChange = this.onSubtitleChange.bind(this)
+    this.onSave = this.onSave.bind(this)
   }
 
   componentDidMount = () => {
@@ -71,7 +74,19 @@ class StoryCreateContainer extends React.Component {
 
   }
 
-  onChange = ({ value }) => {
+  onTitleChange(e) {
+    this.setState({ title: e.target.value })
+    console.log('title change')
+    console.log(this.state)
+  }
+
+  onSubtitleChange(e) {
+    this.setState({ subtitle: e.target.value })
+    console.log('subtitle change')
+    console.log(this.state)
+  }
+
+  onSlateChange = ({ value }) => {
     if (value.document != this.state.value.document) {
       let content = value.toJSON()
       this.props.updateDraft(content)
@@ -79,11 +94,16 @@ class StoryCreateContainer extends React.Component {
     this.setState({ value })
   }
 
-  onSave = (e) => {
+  onSave(e) {
     e.preventDefault()
-    const storyHTML = html.serialize(this.state.value)
+    const story = {
+      title: this.state.title,
+      subtitle: this.state.subtitle,
+      author: this.props.profile.username,
+      body: html.serialize(this.state.value)
+    }
     console.log('save called')
-    console.log(storyHTML,this.props.profile.username)
+    console.log(story)
     // this.props.createStory(storyHTML,)
   }
 
@@ -119,7 +139,7 @@ class StoryCreateContainer extends React.Component {
       data: { code }
     })
 
-    this.onChange(change)
+    this.onSlateChange(change)
 
   }
 
@@ -199,19 +219,23 @@ class StoryCreateContainer extends React.Component {
   render() {
    return (
 
-     <form onSubmit={ this.onSave }>
+     <form onSubmit={this.onSave}>
        <TextMenu
          menuRef={this.menuRef}
          value={this.state.value}
-         onChange={this.onChange}
+         onChange={this.onSlateChange}
        />
+
+       <input id="title" type="text" name="title" value={this.state.title} onChange={this.onTitleChange} placeholder="Story Title" />
+       <br/><br/>
+       <input id="subtitle" type="text" name="subtitle" value={this.state.subtitle} onChange={this.onSubtitleChange} placeholder="Story Subtitle" />
 
        <div className="editor">
          <Editor
            placeholder="Tell me a story 😍👋🎉..."
            value={this.state.value}
            schema={schema}
-           onChange={this.onChange}
+           onChange={this.onSlateChange}
            renderMark={this.renderMark}
            onDrop={this.onDropOrPaste}
            onPaste={this.onDropOrPaste}

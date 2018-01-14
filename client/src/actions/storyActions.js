@@ -16,6 +16,9 @@ function createdStory(story) {
 export function createStory(payload) {
   console.log('createStory action called')
   return (dispatch) => {
+    /* right here we need a call to check if the story
+    title already exist for this user. If so, we need to append
+    a number to the URI of this story to maintain unique URLs */
     axios.post(constructURI(payload,"post"))
       .then(response => {
         dispatch(createdStory(payload))
