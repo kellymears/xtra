@@ -1,29 +1,8 @@
 import axios from 'axios'
 
-function constructURI(payload,method) {
+function constructURI(draft,method) {
   return '/api/story/' + method + '/' +
-          payload.person + '/' + payload.story
-}
-
-function createdStory(story) {
-  console.log('createdStory action called')
-  return {
-    type: 'STORY_CREATE_SUCCESS',
-    story: story
-  }
-}
-
-export function createStory(payload) {
-  console.log('createStory action called')
-  return (dispatch) => {
-    /* right here we need a call to check if the story
-    title already exist for this user. If so, we need to append
-    a number to the URI of this story to maintain unique URLs */
-    axios.post(constructURI(payload,"post"))
-      .then(response => {
-        dispatch(createdStory(payload))
-      })
-  }
+          draft.person + '/' + draft.title
 }
 
 function gotStory(story) {

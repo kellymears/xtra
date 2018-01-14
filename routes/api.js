@@ -4,6 +4,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const { User, Post, Person, Story } = require('../models')
 
+/* persons/profiles */
 router.get('/person/check/:username', function(req,res){
   Person.findOne({ username: req.params.username })
   .exec(function(err,person) {
@@ -55,6 +56,22 @@ router.post('/person/update/', function(req,res){
       return res.json(person)
     }
   )
+})
+
+/* stories */
+router.post('/story/create', function(req,res){
+  var newStory = Story({
+    _id: new mongoose.Types.ObjectId(),
+    title: req.body.title,
+    subtitle: req.body.subtitle,
+    body: req.body.body,
+    author: req.body.author,
+  })
+  newStory.save(function(err){
+    if (err) return console.log(err)
+    console.log(newStory)
+    return res.json(newStory)
+  })
 })
 
 router.get('/story/get/:person/:story', function(req,res){

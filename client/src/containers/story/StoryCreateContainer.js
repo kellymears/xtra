@@ -17,8 +17,7 @@ import { schema } from './slate/schema'
 import { html } from './slate/serialize'
 import { insertImage } from './slate/images'
 
-import { createStory } from "../../actions/storyActions"
-import { createDraft, updateDraft } from "../../actions/draftActions"
+import { createDraft, updateDraft, publishDraft } from "../../actions/draftActions"
 
 import {
   Container,
@@ -101,12 +100,12 @@ class StoryCreateContainer extends React.Component {
     const story = {
       title: this.state.title,
       subtitle: this.state.subtitle,
-      author: this.props.profile.username,
+      author: this.props.profile._id,
       body: html.serialize(this.state.value)
     }
     console.log('save called')
     console.log(story)
-    // this.props.createStory(storyHTML,)
+    this.props.publishDraft(story)
   }
 
   menuRef = (menu) => {
@@ -188,7 +187,7 @@ class StoryCreateContainer extends React.Component {
         return <p {...attributes}>{children}</p>
       }
       case 'heading1': {
-        return <h1 {...attributes}>{children}</h1>
+        return <h2 {...attributes}>{children}</h2>
       }
       case 'code': {
         return <pre><code {...attributes}>{children}</code></pre>
@@ -277,6 +276,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     createDraft: (story) => dispatch(createDraft(story)),
     updateDraft: (draft) => dispatch(updateDraft(draft)),
+    publishDraft: (draft) => dispatch(publishDraft(draft))
   }
 }
 

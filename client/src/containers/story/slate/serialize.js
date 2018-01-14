@@ -3,7 +3,7 @@ import Html from 'slate-html-serializer'
 
 const BLOCK_TAGS = {
   p: 'paragraph',
-  h1: 'heading1',
+  h2: 'heading1',
   pre: 'code',
   span: 'emoji',
 }
@@ -34,7 +34,7 @@ const rules = [
       switch (obj.type) {
         case 'code': return <pre><code>{children}</code></pre>
         case 'paragraph': return <p>{children}</p>
-        case 'heading1': return <h1>{children}</h1>
+        case 'heading1': return <h2>{children}</h2>
         case 'emoji': return <p><span className="emoji">{children}</span></p>
       }
     }
