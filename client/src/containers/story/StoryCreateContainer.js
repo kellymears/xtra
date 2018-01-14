@@ -41,8 +41,7 @@ class StoryCreateContainer extends React.Component {
     } else {
       this.state = { value: Value.fromJSON(this.props.draft) }
     }
-    this.onTitleChange = this.onTitleChange.bind(this)
-    this.onSubtitleChange = this.onSubtitleChange.bind(this)
+    this.onInputChange = this.onInputChange.bind(this)
     this.onSave = this.onSave.bind(this)
   }
 
@@ -74,23 +73,13 @@ class StoryCreateContainer extends React.Component {
 
   }
 
-  onTitleChange(e) {
-    this.setState({ title: e.target.value })
-    console.log('title change')
-    console.log(this.state)
-  }
-
-  onSubtitleChange(e) {
-    this.setState({ subtitle: e.target.value })
-    console.log('subtitle change')
-    console.log(this.state)
+  onInputChange(e) {
+    this.setState({ [e.target.name]: e.target.value})
   }
 
   onSlateChange = ({ value }) => {
-    if (value.document != this.state.value.document) {
-      let content = value.toJSON()
-      this.props.updateDraft(content)
-    }
+    if (value.document != this.state.value.document)
+      this.props.updateDraft(value.toJSON())
     this.setState({ value })
   }
 
@@ -226,9 +215,9 @@ class StoryCreateContainer extends React.Component {
          onChange={this.onSlateChange}
        />
 
-       <input id="title" type="text" name="title" value={this.state.title} onChange={this.onTitleChange} placeholder="Story Title" />
+       <input id="title" type="text" name="title" value={this.state.title} onChange={this.onInputChange} placeholder="Story Title" />
        <br/><br/>
-       <input id="subtitle" type="text" name="subtitle" value={this.state.subtitle} onChange={this.onSubtitleChange} placeholder="Story Subtitle" />
+       <input id="subtitle" type="text" name="subtitle" value={this.state.subtitle} onChange={this.onInputChange} placeholder="Story Subtitle" />
 
        <div className="editor">
          <Editor
