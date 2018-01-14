@@ -18,7 +18,7 @@ import { html } from './slate/serialize'
 import { insertImage } from './slate/images'
 
 import { createStory } from "../../actions/storyActions"
-import { createDraft, updateDraftState } from "../../actions/draftActions"
+import { createDraft, updateDraft } from "../../actions/draftActions"
 
 import {
   Container,
@@ -92,7 +92,7 @@ class StoryCreateContainer extends React.Component {
 
   onSlateChange = ({ value }) => {
     if (value.document != this.state.value.document)
-      this.props.updateDraftState({ body: value.toJSON() })
+      this.props.updateDraft({ body: value.toJSON() })
     this.setState({ value })
   }
 
@@ -276,7 +276,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     createDraft: (story) => dispatch(createDraft(story)),
-    updateDraftState: (draft) => dispatch(updateDraftState(draft)),
+    updateDraft: (draft) => dispatch(updateDraft(draft)),
   }
 }
 

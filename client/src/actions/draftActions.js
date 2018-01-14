@@ -7,7 +7,7 @@ export function createDraft(draft) {
   }
 }
 
-export function updateDraftState(draft) {
+export function updateDraft(draft) {
   return (dispatch) => {
     if(draft.body)
       dispatch(updateDraftBody(draft.body))
