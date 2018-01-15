@@ -17,7 +17,9 @@ import { schema } from './slate/schema'
 import { html } from './slate/serialize'
 import { insertImage } from './slate/images'
 
-import { createDraft, updateDraft, publishDraft } from "../../actions/draftActions"
+import { createDraft,
+         updateDraft,
+         publishDraft } from "../../actions/draftActions"
 
 import {
   Container,
