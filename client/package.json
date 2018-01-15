@@ -32,14 +32,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "eject": "react-scripts eject"
   },
-  "proxy": "http://localhost:8888",
-  "devDependencies": {
-    "@storybook/react": "^3.3.3",
-    "@storybook/addon-actions": "^3.3.3",
-    "@storybook/addon-links": "^3.3.3"
-  }
+  "proxy": "http://localhost:8888"
 }

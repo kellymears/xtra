@@ -1,5 +1,4 @@
 const express = require('express')
-const mongoose = require('mongoose')
 const app = express()
 const http = require('http').Server(app)
 
@@ -15,12 +14,10 @@ app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({extended: true}))
 
 app.use(cors())
 
 routes(app)
 
-http.listen(8888, function() {
-  console.log('listening on *:8888')
-})
+http.listen(8888)

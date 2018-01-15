@@ -5,4 +5,5 @@ const api = require('./api');
 module.exports = (app) => {
 	app.use('/', base);
 	app.use('/api', api);
+	app.use('/upload', upload)
 };
