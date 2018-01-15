@@ -141,10 +141,8 @@ class SignInCallback extends Component {
           username: username,
           id: this.state.profile.sub,
           email: this.state.profile.email,
-          name: {
-            first: this.state.profile.given_name,
-            last: this.state.profile.family_name,
-          },
+          first_name: this.state.profile.given_name,
+          last_name: this.state.profile.family_name,
           picture: this.state.profile.picture,
           gender: this.state.profile.gender,
           auth: {

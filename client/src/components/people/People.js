@@ -13,51 +13,36 @@ import {
 
 class People extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      users: []
+      people: []
     }
   }
   componentDidMount() {
-    axios.get('/api/users/get/')
+    axios.get('/api/person/get/all')
     .then(response => {
-      if(!(response.data==null)) {
-        console.log(response.data)
-        this.setState({
-          users: response.data
-        })
-      }
-      else {
-        this.setState({
-          users: null
-        })
-      }
+      console.log(response)
+      this.setState({
+        people: response.data
+      })
     })
   }
   render() {
-    if(this.state.users==null)
-      return (
-        <Row>
-          <Col>
-            <h4>People</h4>
-            <p>Huh. It looks like there are no users.</p>
-          </Col>
-        </Row>
-      )
+    if(this.state.people!==null) {
       return (
         <Row>
           <Col>
             <h4>People</h4>
             <hr/>
             {
-              this.state.users.map(( {username, email} ) => {
-                console.log(username)
+              this.state.people.map(( {username, email} ) => {
                 return <p><Link to={`/@${username}`}>{username} - {email}</Link></p>
               })
             }
           </Col>
         </Row>
       )
+    }
   }
 }
 

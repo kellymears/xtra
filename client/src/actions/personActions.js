@@ -1,17 +1,5 @@
 import axios from 'axios'
 
-function createdPerson(payload) {
-   return {
-
-   }
-}
-
-export function createPerson(payload) {
-  return {
-
-  }
-}
-
 function gotPerson(payload) {
   return {
       type: 'PERSON_LOAD_SUCCESS',
@@ -25,17 +13,5 @@ export function getPerson(payload) {
       .then(response => {
         dispatch(gotPerson(response.data))
       })
-  }
-}
-
-function deletedPerson(payload) {
-  return {
-
-  }
-}
-
-export function deletePerson(payload) {
-  return {
-
   }
 }

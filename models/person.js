@@ -15,10 +15,8 @@ var personSchema = new Schema({
     type: String,
     lowercase: true
   },
-  name: {
-    first: String,
-    last: String
-  },
+  first_name: String,
+  last_name: String,
   gender: String,
   bio: String,
   picture: String,

@@ -15,30 +15,18 @@ class Person extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      person: [],
-      stories: []
+      person: []
     }
   }
   componentDidMount() {
-    axios.get('/api/user/get/' + this.props.match.params.person)
+    axios.get('/api/person/get/' + this.props.match.params.person)
     .then(response => {
-      console.log(response.data)
-      if(!(response.data==null)) {
-        this.setState({
-          person: response.data.user,
-          stories: response.data.posts
-        })
-      }
-      else {
-        this.setState({
-          person: null,
-          stories: null
-        })
-      }
+      if(!(response.data==null))
+        this.setState({ person: response.data.person })
     })
   }
   render() {
-    if(this.state.person==null) {
+    if(this.state.person.username == null) {
       return (
         <Container>
           <Row>
@@ -54,25 +42,8 @@ class Person extends Component {
         <Container>
           <Row>
             <Col>
+              <h1>{this.state.person.first_name} {this.state.person.last_name}</h1>
               <h2>@{this.state.person.username}</h2>
-              <p><strong>ID:</strong>{this.state.person._id}</p>
-              <p><strong>Email:</strong>{this.state.person.email}</p>
-              <p><strong>Password:</strong>{this.state.person.password}</p>
-              <h2>Stories</h2>
-              {
-                this.state.stories.map(( {title, subtitle} ) => {
-                  return (
-                    <div>
-                      <h2>
-                        <Link to={`/@${this.state.person.username}/${title}`}>
-                          {title}
-                        </Link>
-                      </h2>
-                      <h3>{subtitle}</h3>
-                    </div>
-                  )
-                })
-              }
             </Col>
           </Row>
         </Container>

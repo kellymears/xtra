@@ -19,18 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(cors())
 
-const authCheck = jwt({
-  secret: jwks.expressJwtSecret({
-        cache: true,
-        rateLimit: true,
-        jwksRequestsPerMinute: 5,
-        jwksUri: "https://xtrarad.auth0.com/.well-known/jwks.json"
-    }),
-    audience: 'http://localhost:8888/',
-    issuer: "https://xtrarad.auth0.com/",
-    algorithms: ['RS256']
-})
-
 routes(app)
 
 http.listen(8888, function() {
