@@ -1,5 +1,7 @@
 var mongoose = require('mongoose')
-mongoose.connect('mongodb://xtrauser:xtrapassword@ds131237.mlab.com:31237/xtra')
+const databaseConfig = require('./config').database
+
+mongoose.connect(`mongodb://${databaseConfig.username}:${databaseConfig.password}@${databaseConfig.host}`)
 
 var db = mongoose.connection
 db.on('error', console.error.bind(console, 'connection error:'))
