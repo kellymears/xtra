@@ -3,12 +3,12 @@ import auth0 from 'auth0-js'
 import decode from 'jwt-decode'
 
 const auth = new auth0.WebAuth({
-  domain: 'xtrarad.auth0.com',
-  clientID: `oAfmxY0WUVFXYrZDkT7tvc8zWz-pKnA-`,
-  redirectUri: 'http://localhost:3000/sign-in',
-  audience: 'https://xtrarad.auth0.com/userinfo',
+  domain:       'xtrarad.auth0.com',
+  clientID:     'oAfmxY0WUVFXYrZDkT7tvc8zWz-pKnA-',
+  redirectUri:  'http://localhost:3000/sign-in',
+  audience:     'https://xtrarad.auth0.com/userinfo',
   responseType: 'token id_token',
-  scope: 'openid email profile'
+  scope:        'openid email profile'
 })
 
 function signInAction() {
@@ -19,7 +19,7 @@ function signInAction() {
 
 export function signIn(){
   return (dispatch) => {
-      dispatch(signInAction())
+    dispatch(signInAction())
     auth.authorize()
   }
 }
@@ -41,7 +41,7 @@ export function authenticate() {
 
 function addState(profile) {
   return {
-    type: 'SIGN_IN',
+    type:    'SIGN_IN',
     profile: profile
   }
 }

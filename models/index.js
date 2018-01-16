@@ -15,8 +15,8 @@ var postSchema = require('./post') //deprecated
 var storySchema = require('./story')
 
 module.exports = {
-	User: mongoose.model('User', userSchema),
+  User:   mongoose.model('User', userSchema),
   Person: mongoose.model('Person', personSchema),
-	Post: mongoose.model('Post', postSchema),
-  Story: mongoose.model('Story', storySchema)
+  Post:   mongoose.model('Post', postSchema),
+  Story:  mongoose.model('Story', storySchema)
 }

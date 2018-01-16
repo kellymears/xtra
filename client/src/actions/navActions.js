@@ -1,6 +1,6 @@
 function updatedMetaNav(visibility) {
   return {
-    type: 'META_NAV_UPDATE',
+    type:    'META_NAV_UPDATE',
     visible: visibility
   }
 }

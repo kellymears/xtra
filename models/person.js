@@ -2,38 +2,38 @@ var Schema = require('mongoose').Schema
 
 var personSchema = new Schema({
   _id: {
-    type: String,
+    type:     String,
     required: true,
-    unique: true
+    unique:   true
   },
   username: {
-    type: String,
+    type:     String,
     required: true,
-    unique: true
+    unique:   true
   },
   email: {
-    type: String,
+    type:      String,
     lowercase: true
   },
-  first_name: String,
-  last_name: String,
-  gender: String,
-  bio: String,
-  picture: String,
+  first_name:   String,
+  last_name:    String,
+  gender:       String,
+  bio:          String,
+  picture:      String,
   date_created: {
-    type: Date,
+    type:    Date,
     default: Date.now
   },
   date_updated: {
-    type: Date,
+    type:    Date,
     default: Date.now
   },
   date_accessed: {
-    type: Date,
+    type:    Date,
     default: Date.now
   },
   auth: {
-    id: String,
+    id:     String,
     access: String
   }
 })

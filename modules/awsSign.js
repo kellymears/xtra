@@ -2,7 +2,7 @@ var aws = require('aws-sdk')
 const awsConfig = require('./awsConfig').aws
 
 aws.config.update({
-  accessKeyId: awsConfig.awsAccessKey
+  accessKeyId: awsConfig.awsAccessKey,
   secretAccessKey: awsConfig.awsSecretKey
 })
 
@@ -15,7 +15,7 @@ exports = module.exports = {
         Expires: 60,
         ContentType: filetype
     }
-    s3.getSignedUrl(‘putObject’, params, function(err, data) {
+    s3.getSignedUrl('putObject', params, function(err, data) {
       if (err) return err
       else return data
     })

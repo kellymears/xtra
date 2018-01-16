@@ -1,12 +1,12 @@
-import { createStore, applyMiddleware, compose } from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import throttle from 'lodash/throttle'
 import decode from 'jwt-decode'
 import axios from 'axios'
 
-import { loadStateFromStorage,
-         saveStateToStorage,
-         removeStateFromStorage } from './localstorage'
+import {loadStateFromStorage,
+  saveStateToStorage,
+  removeStateFromStorage} from './localstorage'
 
 import reducer from '../reducers/rootReducer'
 
@@ -45,18 +45,18 @@ const authMiddleware = store => next => action => {
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const enhancer = composeEnhancers(applyMiddleware(thunk,authMiddleware))
+const enhancer = composeEnhancers(applyMiddleware(thunk, authMiddleware))
 const persistedState = loadStateFromStorage()
-const store = createStore(reducer,persistedState,enhancer)
+const store = createStore(reducer, persistedState, enhancer)
 
 store.subscribe(throttle(() => {
   if(store.getState()) {
     console.log(store.getState().draft)
     saveStateToStorage({
       profile: store.getState().profile,
-      draft: store.getState().draft
+      draft:   store.getState().draft
     })
   }
 }, 1000))
 
-export { store }
+export {store}

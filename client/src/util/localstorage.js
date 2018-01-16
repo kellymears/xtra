@@ -1,9 +1,9 @@
 export const loadStateFromStorage = () => {
   try {
     const serializedState = localStorage.getItem('state')
-    if(serializedState == null) {
+    if(serializedState == null) 
       return undefined
-    }
+    
     return JSON.parse(serializedState)
   } catch (err) {
     return undefined
@@ -13,7 +13,7 @@ export const loadStateFromStorage = () => {
 export const saveStateToStorage = (state) => {
   try {
     const serializedState = JSON.stringify(state)
-    localStorage.setItem('state',serializedState)
+    localStorage.setItem('state', serializedState)
   } catch (err) {
     return undefined
   }

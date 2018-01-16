@@ -1,13 +1,13 @@
 import axios from 'axios'
 
-function constructURI(payload,method) {
+function constructURI(payload, method) {
   return '/api/story/' + method + '/' +
           payload.person + '/' + payload.title
 }
 
 function gotStory(story) {
   return {
-    type: 'STORY_LOAD_SUCCESS',
+    type:  'STORY_LOAD_SUCCESS',
     story: story
   }
 }
@@ -15,8 +15,8 @@ function gotStory(story) {
 export function getStory(payload) {
   return (dispatch) => {
     console.log(payload)
-    axios.get(constructURI(payload,"get"))
-      .then(response => {
+    axios.get(constructURI(payload, 'get')).
+      then(response => {
         console.log(response)
         dispatch(gotStory(response.data))
       })
@@ -25,15 +25,15 @@ export function getStory(payload) {
 
 function updatedStory(payload) {
   return {
-    type: 'STORY_UPDATE_SUCCESS',
+    type:  'STORY_UPDATE_SUCCESS',
     story: payload
   }
 }
 
 export function updateStory(payload) {
   return (dispatch) => {
-    axios.post(constructURI(payload,"post"))
-      .then(response => {
+    axios.post(constructURI(payload, 'post')).
+      then(response => {
         dispatch(updatedStory(response.data))
       })
   }
@@ -41,15 +41,15 @@ export function updateStory(payload) {
 
 function deletedStory(payload) {
   return {
-    type: 'STORY_DELETE_SUCCESS',
+    type:  'STORY_DELETE_SUCCESS',
     story: payload
   }
 }
 
 export function deleteStory(payload) {
   return (dispatch) => {
-    axios.post(constructURI(payload,"post"))
-      .then(response => {
+    axios.post(constructURI(payload, 'post')).
+      then(response => {
         dispatch(deletedStory(response.data))
       })
   }

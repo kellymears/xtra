@@ -1,17 +1,17 @@
 var Schema = require('mongoose').Schema
 
 var userSchema = new Schema({
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  email: { type: String, required: true, lowercase: true },
-  bio: String,
-  name: {
+  username: {type: String, required: true, unique: true},
+  password: {type: String, required: true},
+  email:    {type: String, required: true, lowercase: true},
+  bio:      String,
+  name:     {
     first: String,
-    last: String
+    last:  String
   },
   date: {
-    created: { type: Date, default: Date.now },
-    updated: { type: Date, default: Date.now }
+    created: {type: Date, default: Date.now},
+    updated: {type: Date, default: Date.now}
   }
 })
 

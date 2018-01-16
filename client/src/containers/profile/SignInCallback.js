@@ -45,6 +45,7 @@ class SignInCallback extends Component {
     this.handleUsernameForm = this.handleUsernameForm.bind(this)
   }
   componentWillMount() {
+    console.log('component will mount')
     this.fetchProfile((err,profile) => {
       if (!err) {
         this.setState({
@@ -68,9 +69,12 @@ class SignInCallback extends Component {
     })
   }
   isProfileNew() {
+    console.log('is profile new called')
+    console.log(this.state.profile)
     if(this.state.profile) {
-      axios.get('/api/person/get/' + this.state.profile.sub)
+      axios.get('/api/person/checkById/' + this.state.profile.sub)
       .then(response => {
+        console.log(response.data)
         if(response.data==null)
           this.setState({
             loading: false,
@@ -82,6 +86,7 @@ class SignInCallback extends Component {
     }
   }
   async handleExistingProfile() {
+    console.log('handle existing profile')
     this.props.addProfileToState(await this.refreshProfileAuth())
     this.props.history.push('/')
   }

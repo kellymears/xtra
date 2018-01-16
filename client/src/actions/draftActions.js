@@ -2,10 +2,10 @@ import axios from 'axios'
 
 export function createDraft(draft) {
   return {
-    type: 'CREATE_DRAFT',
-    title: draft.title,
+    type:     'CREATE_DRAFT',
+    title:    draft.title,
     subtitle: draft.subtitle,
-    body: draft.body,
+    body:     draft.body
   }
 }
 
@@ -23,15 +23,16 @@ export function updateDraft(draft) {
 export function publishDraft(draft) {
   return (dispatch) => {
     console.log(draft)
+
     /* here we need a call to check if the story
     title already exist for this user. If so, we need to append
     a number to the URI of this story to maintain unique URLs */
-    axios.post('/api/story/create',draft)
-      .then(response => {
+    axios.post('/api/story/create', draft).
+      then(response => {
         console.log(response)
         dispatch(publishedDraft(draft))
-      })
-      .catch(function(err) {
+      }).
+      catch(function(err) {
         console.log(err)
       })
   }
@@ -39,14 +40,14 @@ export function publishDraft(draft) {
 
 function updateDraftTitle(title) {
   return {
-    type: 'UPDATE_DRAFT_TITLE',
+    type:  'UPDATE_DRAFT_TITLE',
     title: title
   }
 }
 
 function updateDraftSubtitle(subtitle) {
   return {
-    type: 'UPDATE_DRAFT_SUBTITLE',
+    type:     'UPDATE_DRAFT_SUBTITLE',
     subtitle: subtitle
   }
 }
@@ -60,7 +61,7 @@ function updateDraftBody(body) {
 
 function publishedDraft(draft) {
   return {
-    type: 'PUBLISH_DRAFT',
+    type:  'PUBLISH_DRAFT',
     draft: draft
   }
 }

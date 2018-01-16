@@ -2,13 +2,13 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var postSchema = new Schema({
-	title: String,
-	subtitle: String,
-	author: { type: Schema.Types.ObjectId, ref: 'User' },
-	body: String,
-  date: {
-    created: { type: Date, default: Date.now },
-    updated: { type: Date, default: Date.now }
+  title:    String,
+  subtitle: String,
+  author:   {type: Schema.Types.ObjectId, ref: 'User'},
+  body:     String,
+  date:     {
+    created: {type: Date, default: Date.now},
+    updated: {type: Date, default: Date.now}
   }
 })
 

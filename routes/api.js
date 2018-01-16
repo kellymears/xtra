@@ -2,46 +2,55 @@ const express = require('express')
 const router = express.Router()
 
 const mongoose = require('mongoose')
-const { Person, Story } = require('../models')
+const {Person, Story} = require('../models')
 
 /* persons/profiles */
-router.get('/person/get/all', function(req,res){
+router.get('/person/get/all', function(req, res){
   console.log('request for all people data received')
   Person.find().exec(function(err, people) {
     return res.json(people)
   })
 })
 
-router.get('/person/get/:username', function(req,res){
+router.get('/person/get/:username', function(req, res){
   let username = decodeURIComponent(req.params.username)
-  Person.findOne({ username: username })
-  .exec(function(err,person) {
-    if(err) return res.send(err)
-    if(person) return res.json({ person: person })
-    return res.json(null)
-  })
+  Person.findOne({username: username}).
+    exec(function(err, person) {
+      if(err) return res.send(err)
+      if(person) return res.json({person: person})
+      return res.json(null)
+    })
 })
 
-router.get('/person/check/:username', function(req,res){
-  Person.findOne({ username: req.params.username })
-  .exec(function(err,person) {
-    if (err) return res.send(err)
-    if(!person) return res.send('new')
-    res.send('existing')
-  })
+router.get('/person/checkById/:id', function(req, res){
+  Person.findOne({_id: req.params.id}).
+    exec(function(err, person) {
+      if(err) return res.send(err)
+      if(person) return res.json({person: person})
+      return res.json(null)
+    })
 })
 
-router.post('/person/create/', function(req,res){
+router.get('/person/check/:username', function(req, res){
+  Person.findOne({username: req.params.username}).
+    exec(function(err, person) {
+      if (err) return res.send(err)
+      if(!person) return res.send('new')
+      res.send('existing')
+    })
+})
+
+router.post('/person/create/', function(req, res){
   var newPerson = Person({
-    _id: req.body.id,
-    username: req.body.username,
-    email: req.body.email,
+    _id:        req.body.id,
+    username:   req.body.username,
+    email:      req.body.email,
     first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    picture: req.body.picture,
-    gender: req.body.gender,
-    auth: {
-      id: req.body.auth.id,
+    last_name:  req.body.last_name,
+    picture:    req.body.picture,
+    gender:     req.body.gender,
+    auth:       {
+      id:     req.body.auth.id,
       access: req.body.auth.access
     }
   })
@@ -50,23 +59,23 @@ router.post('/person/create/', function(req,res){
     if (err) console.log(err)
     res.json({
       response: 'mad success!',
-      person: newPerson
+      person:   newPerson
     })
   })
 })
 
-router.post('/person/update/', function(req,res){
-  Person.findOneAndUpdate({ _id: req.body.id },
-    { $set: {
-        auth: {
-          id: req.body.update.auth.id,
-          access: req.body.update.auth.access
-        },
-        date_accessed: Date.now()
-      }
+router.post('/person/update/', function(req, res){
+  Person.findOneAndUpdate({_id: req.body.id},
+    {$set: {
+      auth: {
+        id:     req.body.update.auth.id,
+        access: req.body.update.auth.access
+      },
+      date_accessed: Date.now()
+    }
     },
-    { new: true },
-    function(err,person){
+    {new: true},
+    function(err, person){
       if(err) return res.send(err)
       return res.json(person)
     }
@@ -74,13 +83,13 @@ router.post('/person/update/', function(req,res){
 })
 
 /* stories */
-router.post('/story/create', function(req,res){
+router.post('/story/create', function(req, res){
   var newStory = Story({
-    _id: req.body._id,
-    title: req.body.title,
+    _id:      req.body._id,
+    title:    req.body.title,
     subtitle: req.body.subtitle,
-    body: req.body.body,
-    author: req.body.author,
+    body:     req.body.body,
+    author:   req.body.author
   })
   newStory.save(function(err){
     if (err) return console.log(err)
@@ -89,11 +98,11 @@ router.post('/story/create', function(req,res){
   })
 })
 
-router.get('/story/get/:person/:story', function(req,res){
+router.get('/story/get/:person/:story', function(req, res){
   Story.find({
     title: decodeURIComponent(req.params.story)
   }).populate({
-    path: 'author',
+    path:  'author',
     match: {
       username: req.params.person
     }
@@ -104,7 +113,7 @@ router.get('/story/get/:person/:story', function(req,res){
   })
 })
 
-router.get('/story/get/all', function(req,res){
+router.get('/story/get/all', function(req, res){
   console.log('api request for all stories')
   Story.find().populate('author').exec(function(err, stories) {
     console.log(stories)

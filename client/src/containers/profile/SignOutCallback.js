@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
-import { addProfile, removeProfile } from "../../actions/profileActions"
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import {Link, withRouter} from 'react-router-dom'
+import {addProfile, removeProfile} from '../../actions/profileActions'
 
 class SignOutCallback extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class SignOutCallback extends Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    removeProfile: () => dispatch(removeProfile()),
+    removeProfile: () => dispatch(removeProfile())
   }
 }
 

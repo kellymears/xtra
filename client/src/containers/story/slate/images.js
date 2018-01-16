@@ -1,10 +1,10 @@
 export function insertImage(change, src, target) {
-  if (target) {
+  if (target) 
     change.select(target)
-  }
+  
   change.insertBlock({
-    type: 'image',
+    type:   'image',
     isVoid: true,
-    data: { src }
+    data:   {src}
   })
 }
