@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Provider } from 'react-redux';
-import { store } from '../store'
+import { store } from '../util/store'
 
 import {
   BrowserRouter,
@@ -8,6 +8,8 @@ import {
   Switch,
   Redirect
 } from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import {
   Alert,
@@ -21,16 +23,17 @@ import {
   ListGroupItem
 } from 'reactstrap'
 
-import '../components/app/App.css'
-import '../components/app/Nav.css'
-
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import MetaNavContainer from "../containers/MetaNavContainer"
-import NavContainer from "../containers/NavContainer"
-import Home from "../components/app/Home"
+import MetaNavContainer from "../containers/nav/metanav/MetaNavContainer"
+import '../containers/nav/metanav/MetaNav.css'
+
+import NavContainer from "../containers/nav/topicnav/TopicNavContainer"
+import '../containers/nav/topicnav/TopicNav.css'
+
+import Home from "../containers/home/Home"
 
 storiesOf('Navigation', module)
 .addDecorator(story =>
