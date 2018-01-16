@@ -4,9 +4,6 @@ import {withRouter} from 'react-router-dom'
 import {removeProfile} from '../../actions/profileActions'
 
 class SignOutCallback extends Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     this.props.removeProfile()
     this.props.history.push('/')

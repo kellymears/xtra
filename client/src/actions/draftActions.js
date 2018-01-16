@@ -20,13 +20,11 @@ export function updateDraft(draft) {
   }
 }
 
+/* here we also need to check if the story
+title already exist for this user. If so, we need to append
+a number to the URI of this story to maintain unique URLs */
 export function publishDraft(draft) {
   return (dispatch) => {
-    console.log(draft)
-
-    /* here we need a call to check if the story
-    title already exist for this user. If so, we need to append
-    a number to the URI of this story to maintain unique URLs */
     axios.post('/api/story/create', draft)
       .then(response => {
         console.log(response)

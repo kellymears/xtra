@@ -7,8 +7,6 @@ import Story from '../../components/stories/StoryComponent'
 
 class StoryContainer extends Component {
   componentDidMount(){
-    console.log(this.props.match.params.person)
-    console.log(this.props.match.params.story)
     this.props.getStory({
       person: this.props.match.params.person,
       title:  this.props.match.params.title
@@ -24,15 +22,11 @@ class StoryContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    story: state.story.story
-  }
+  return {story: state.story.story}
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
-    getStory: (story) => dispatch(getStory(story))
-  }
+  return {getStory: (story) => dispatch(getStory(story))}
 }
 
 export default connect(mapStateToProps,

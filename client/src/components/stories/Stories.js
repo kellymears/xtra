@@ -20,7 +20,6 @@ class Stories extends Component {
         this.setState({
           stories: response.data
         })
-        console.log(response.data)
       })
   }
   render() {

@@ -16,9 +16,6 @@ import {
 import './TopicNav.css'
 
 class TopicNavContainer extends Component {
-  constructor(props){
-    super(props)
-  }
   handleSignInClick() {
     this.props.signIn()
   }
@@ -26,8 +23,7 @@ class TopicNavContainer extends Component {
     this.props.signOut()
   }
   getButtonStyle() {
-    console.log(this.props.navState)
-    if(this.props.navState=='visible')
+    if(this.props.navState==='visible')
       return 'hidden'
     else
       return 'visible'

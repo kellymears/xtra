@@ -1,12 +1,11 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Link, withRouter } from 'react-router-dom'
 
 import { Block, Value } from 'slate'
-import { Editor, getEventRange, getEventTransfer } from 'slate-react'
+import { Editor,
+         getEventRange,
+         getEventTransfer } from 'slate-react'
 import isImage from 'is-image'
 import isUrl from 'is-url'
 
@@ -20,13 +19,6 @@ import { insertImage } from './slate/images'
 import { createDraft,
          updateDraft,
          publishDraft } from "../../actions/draftActions"
-
-import {
-  Container,
-  Row,
-  Col,
-  Button,
-} from 'reactstrap'
 
 import './StoryCreate.css'
 
@@ -42,8 +34,9 @@ class StoryCreateContainer extends React.Component {
 
   componentWillMount() {
     if(!this.props.draft.body) {
-      console.log('no draft detected :(')
-      this.state = { value: Value.fromJSON(initialValue) }
+      this.setState({
+        value: Value.fromJSON(initialValue)
+      })
       this.props.createDraft({
         title: 'Title',
         subtitle: 'Subtitle',
@@ -67,23 +60,19 @@ class StoryCreateContainer extends React.Component {
   }
 
   updateMenu = () => {
-
     const { value } = this.state
     const menu = this.menu
     if (!menu) return
-
     if (value.isBlurred || value.isEmpty) {
       menu.removeAttribute('style')
       return
     }
-
     const selection = window.getSelection()
     const range = selection.getRangeAt(0)
     const rect = range.getBoundingClientRect()
     menu.style.opacity = 1
     menu.style.top = `${rect.top + window.scrollY - menu.offsetHeight}px`
     menu.style.left = `${rect.left + window.scrollX - menu.offsetWidth / 2 + rect.width / 2}px`
-
   }
 
   onInputChange(e) {
@@ -92,7 +81,7 @@ class StoryCreateContainer extends React.Component {
   }
 
   onSlateChange = ({ value }) => {
-    if (value.document != this.state.value.document)
+    if (value.document !== this.state.value.document)
       this.props.updateDraft({ body: value.toJSON() })
     this.setState({ value })
   }
@@ -105,8 +94,6 @@ class StoryCreateContainer extends React.Component {
       author: this.props.profile._id,
       body: html.serialize(this.state.value)
     }
-    console.log('save called')
-    console.log(story)
     this.props.publishDraft(story)
   }
 
@@ -135,31 +122,27 @@ class StoryCreateContainer extends React.Component {
     e.preventDefault()
     const { value } = this.state
     const change = value.change()
-
     change.insertInline({
       type: 'emoji',
       isVoid: true,
       data: { code }
     })
-
     this.onSlateChange(change)
-
   }
 
   onDropOrPaste = (event, change, editor) => {
-
     event.preventDefault()
     const target = getEventRange(event, change.value)
-    if (!target && event.type == 'drop') return
+    if (!target && event.type ==='drop') return
 
     const transfer = getEventTransfer(event)
     const { type, text, files } = transfer
 
-    if (type == 'files') {
+    if (type === 'files') {
       for (const file of files) {
         const reader = new FileReader()
         const [ mime ] = file.type.split('/')
-        if (mime != 'image') continue
+        if (mime !== 'image') continue
 
         reader.addEventListener('load', () => {
           editor.change((c) => {
@@ -170,7 +153,7 @@ class StoryCreateContainer extends React.Component {
       }
     }
 
-    if (type == 'text') {
+    if (type === 'text') {
       if (!isUrl(text)) return
       if (!isImage(text)) return
       change.call(insertImage, text, target)
@@ -178,8 +161,7 @@ class StoryCreateContainer extends React.Component {
   }
 
   getWordCount = () => {
-    const wordCount = this.state.value.document.text.split(' ').length - 1
-    return wordCount
+    return this.state.value.document.text.split(' ').length - 1
   }
 
   renderNode = (props) => {
@@ -216,23 +198,21 @@ class StoryCreateContainer extends React.Component {
           </span>
         )
       }
+      default: return null
     }
   }
 
   render() {
    return (
-
      <form onSubmit={this.onSave}>
        <TextMenu
          menuRef={this.menuRef}
          value={this.state.value}
          onChange={this.onSlateChange}
        />
-
        <input id="title" type="text" name="title" value={this.state.title} onChange={this.onInputChange} placeholder="Story Title" />
        <br/><br/>
        <input id="subtitle" type="text" name="subtitle" value={this.state.subtitle} onChange={this.onInputChange} placeholder="Story Subtitle" />
-
        <div className="editor">
          <Editor
            placeholder="Tell me a story 😍👋🎉..."
@@ -245,13 +225,10 @@ class StoryCreateContainer extends React.Component {
            renderNode={this.renderNode}
          />
        </div>
-
-       <h5>Click a currently supported Emoji to insert:<br/>
-       {this.renderEmojiSelector()}</h5>
-
+       <h5>Click a currently supported Emoji to insert:</h5>
+       {this.renderEmojiSelector()}
        <button className="btn btn-outline-secondary" type="submit">Publish</button>
        <br/><br/>
-
        <p>Word count: {this.getWordCount()}</p>
      </form>
    )
@@ -260,16 +237,17 @@ class StoryCreateContainer extends React.Component {
   renderMark = (props) => {
     const { children, mark } = props
     switch (mark.type) {
-      case 'bold': return <strong>{children}</strong>
-      case 'italic': return <em>{children}</em>
+      case 'bold':       return <strong>{children}</strong>
+      case 'italic':     return <em>{children}</em>
       case 'underlined': return <u>{children}</u>
+      default: return null
     }
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    draft: state.draft,
+    draft:   state.draft,
     profile: state.profile.data
   }
 }

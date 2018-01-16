@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -116,9 +116,9 @@ class SignInCallback extends Component {
     return new Promise(resolve => {
       axios.get('/api/person/check/' + username )
       .then(response => {
-        if(response.data=='existing') {
+        if(response.data==='existing') {
           resolve(false)
-        } if(response.data=='new') {
+        } if(response.data==='new') {
           resolve(true)
         }
       })
@@ -186,6 +186,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default withRouter(
-  connect(null,mapDispatchToProps)
-  (SignInCallback)
+  connect(null,mapDispatchToProps)(SignInCallback)
 )

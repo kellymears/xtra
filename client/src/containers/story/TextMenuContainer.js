@@ -16,12 +16,12 @@ const root = document.getElementById('app')
 class TextMenu extends React.Component {
   hasMark(type) {
     const {value} = this.props
-    return value.activeMarks.some(mark => mark.type == type)
+    return value.activeMarks.some(mark => mark.type === type)
   }
 
   isNode(type) {
     const {value} = this.props
-    return value.blocks.some(block => block.type == type)
+    return value.blocks.some(block => block.type === type)
   }
 
   onClickMark(event, type) {
@@ -36,7 +36,7 @@ class TextMenu extends React.Component {
   onClickNode(event, type) {
     const {value, onChange} = this.props
     event.preventDefault()
-    const isNode = value.blocks.some(block => block.type == type)
+    const isNode = value.blocks.some(block => block.type === type)
     const change = value.change().setBlock(isNode ? 'paragraph' : type)
     console.log('node format clicked')
     onChange(change)

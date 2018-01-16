@@ -10,7 +10,7 @@ const Welcome = props => {
   return (
     <Row>
       <Col>
-        <h1>Why hello there, { props.profile.first_name }!</h1>
+        <h1>Why hello there, { props.profile.firstName }!</h1>
         <hr/>
       </Col>
     </Row>
