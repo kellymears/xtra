@@ -5,7 +5,10 @@
   "main": "index.js",
   "license": "CC BY-NC-SA",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "./node_modules/.bin/eslint ./ --fix",
+    "client": "cd ./client && npm start",
+    "xtra": "npm run lint & npm start | npm run client"
   },
   "dependencies": {
     "aws-sdk": "^2.181.0",
