@@ -3,12 +3,8 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {
-  Collapse,
-  Container,
   Row,
-  Col,
-  Jumbotron,
-  Button
+  Col
 } from 'reactstrap'
 
 class People extends Component {
@@ -28,7 +24,7 @@ class People extends Component {
       })
   }
   render() {
-    if(this.state.people!==null) 
+    if(this.state.people!==null)
       return (
         <Row>
           <Col>

@@ -3,11 +3,8 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {
-  Collapse,
-  Container,
   Row,
-  Col,
-  Button
+  Col
 } from 'reactstrap'
 
 class Stories extends Component {

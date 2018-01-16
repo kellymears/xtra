@@ -1,12 +1,7 @@
 import React, {Component} from 'react'
 import {
-  Alert,
-  Collapse,
-  Container,
   Row,
   Col,
-  Jumbotron,
-  Button,
   ListGroup,
   ListGroupItem
 } from 'reactstrap'

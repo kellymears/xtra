@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import {bindActionCreators} from 'redux'  //eslint-disable no-unused-vars
 import {Link, withRouter} from 'react-router-dom'
 import {updateMetaNav} from '../../../actions/navActions'
 import {signIn, signOut} from '../../../actions/profileActions'
@@ -9,10 +8,6 @@ import {signIn, signOut} from '../../../actions/profileActions'
 import Waypoint from 'react-waypoint'
 
 import {
-  Nav,
-  NavItem,
-  NavLink,
-  Collapse,
   Container,
   Row,
   Col,
@@ -24,7 +19,6 @@ import {
 } from 'reactstrap'
 
 import Mdsearch from 'react-icons/lib/md/search'
-import TiBell from 'react-icons/lib/ti/bell'
 
 import './MetaNav.css'
 
@@ -52,8 +46,10 @@ class MetaNavContainer extends Component {
     switch (click) {
     case 'logout':
       this.props.signOut()
+      break
     case 'create':
       this.props.history.push('/create')
+      break
     default:
       console.log('weird!')
     }

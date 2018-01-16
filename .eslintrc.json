@@ -8,7 +8,8 @@
     "sourceType": "module",
     "ecmaFeatures": {
         "jsx": true,
-        "modules": true
+        "modules": true,
+        "experimentalObjectRestSpread": true
     }
   },
   "plugins": [
@@ -87,6 +88,8 @@
     "object-curly-spacing": [1,"never",{}],
     "padded-blocks": [1,"never"],
     "quotes": [2, "single", "avoid-escape"],
-    "space-in-parens": [2,"never"]
+    "space-in-parens": [2,"never"],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error"
   }
 }

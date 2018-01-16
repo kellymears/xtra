@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
+
 import {
   BrowserRouter,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom'
-import {connect} from 'react-redux'
-
-import {authenticate} from '../actions/profileActions'
 
 import SignInCallback from '../containers/profile/SignInCallback'
 import SignOutCallback from '../containers/profile/SignOutCallback'

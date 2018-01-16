@@ -1,31 +1,14 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Provider} from 'react-redux';
 import {store} from '../util/store'
 
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  Redirect
-} from 'react-router-dom'
+import {BrowserRouter} from 'react-router-dom'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import {
-  Alert,
-  Collapse,
-  Container,
-  Row,
-  Col,
-  Jumbotron,
-  Button,
-  ListGroup,
-  ListGroupItem
-} from 'reactstrap'
+import {Container} from 'reactstrap'
 
-import {storiesOf} from '@storybook/react';
-import {action} from '@storybook/addon-actions';
-import {linkTo} from '@storybook/addon-links';
+import {storiesOf} from '@storybook/react'
 
 import MetaNavContainer from '../containers/nav/metanav/MetaNavContainer'
 import '../containers/nav/metanav/MetaNav.css'

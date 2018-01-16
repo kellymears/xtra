@@ -1,11 +1,8 @@
 import React from 'react'
 
 import {
-  Collapse,
-  Container,
   Row,
   Col,
-  Button,
   Alert
 } from 'reactstrap'
 

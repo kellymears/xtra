@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -21,12 +20,12 @@ class Person extends Component {
   componentDidMount() {
     axios.get('/api/person/get/' + this.props.match.params.person).
       then(response => {
-        if(!(response.data==null))
+        if(!(response.data===null))
           this.setState({person: response.data.person})
       })
   }
   render() {
-    if(this.state.person.username == null) 
+    if(this.state.person.username===null)
       return (
         <Container>
           <Row>
@@ -36,8 +35,8 @@ class Person extends Component {
           </Row>
         </Container>
       )
-    
-    else 
+
+    else
       return (
         <Container>
           <Row>

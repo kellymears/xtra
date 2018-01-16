@@ -45,11 +45,13 @@ var storySchema = new Schema({
   uri: String
 })
 
+/* eslint-disable no-invalid-this, no-unreachable */
 storySchema.pre('save', function(next) {
   this.dateUpdated = new Date()
   if (!this.dateCreated)
     this.dateCreated = this.dateUpdated
   next()
 })
+/* eslint-enable no-invalid-this, no-unreachable */
 
 module.exports = storySchema

@@ -38,9 +38,11 @@ var personSchema = new Schema({
   }
 })
 
+/* eslint-disable no-invalid-this, no-unreachable */
 personSchema.virtual('fullName').get(function(next) {
   return this.name.first + ' ' + this.name.last
   next()
 })
+/* eslint-enable no-invalid-this, no-unreachable */
 
 module.exports = personSchema
