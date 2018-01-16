@@ -33,7 +33,7 @@ class Person extends Component {
       return (
         <Row>
           <Col>
-            <h1>{this.state.person.first_name} {this.state.person.last_name}</h1>
+            <h1>{this.state.person.firstName} {this.state.person.lastName}</h1>
             <h2>@{this.state.person.username}</h2>
           </Col>
         </Row>
