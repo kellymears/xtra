@@ -14,8 +14,8 @@ class Person extends Component {
     }
   }
   componentDidMount() {
-    axios.get('/api/person/get/' + this.props.match.params.person).
-      then(response => {
+    axios.get('/api/person/get/' + this.props.match.params.person)
+      .then(response => {
         if(!(response.data===null))
           this.setState({person: response.data.person})
       })

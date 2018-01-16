@@ -27,12 +27,12 @@ export function publishDraft(draft) {
     /* here we need a call to check if the story
     title already exist for this user. If so, we need to append
     a number to the URI of this story to maintain unique URLs */
-    axios.post('/api/story/create', draft).
-      then(response => {
+    axios.post('/api/story/create', draft)
+      .then(response => {
         console.log(response)
         dispatch(publishedDraft(draft))
-      }).
-      catch(function(err) {
+      })
+      .catch(function(err) {
         console.log(err)
       })
   }

@@ -9,16 +9,8 @@ import { addProfile } from "../../actions/profileActions"
 import CreateUsername from "../../components/profile/CreateUsername"
 
 import {
-  Container,
   Row,
   Col,
-  Button,
-  Input,
-  InputGroup,
-  InputGroupText,
-  InputGroupAddon,
-  FormGroup,
-  Form,
   Jumbotron
 } from 'reactstrap'
 

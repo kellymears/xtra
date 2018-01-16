@@ -17,8 +17,8 @@ router.get('/person/get/all', function(req, res){
 
 router.get('/person/get/:username', function(req, res){
   let username = decodeURIComponent(req.params.username)
-  Person.findOne({username: username}).
-    exec(function(err, person) {
+  Person.findOne({username: username})
+    .exec(function(err, person) {
       if(err) return res.send(err)
       if(person) return res.json({person: person})
       return res.json(null)
@@ -26,8 +26,8 @@ router.get('/person/get/:username', function(req, res){
 })
 
 router.get('/person/checkById/:id', function(req, res){
-  Person.findOne({_id: req.params.id}).
-    exec(function(err, person) {
+  Person.findOne({_id: req.params.id})
+    .exec(function(err, person) {
       if(err) return res.send(err)
       if(person) return res.json({person: person})
       return res.json(null)
@@ -35,8 +35,8 @@ router.get('/person/checkById/:id', function(req, res){
 })
 
 router.get('/person/check/:username', function(req, res){
-  Person.findOne({username: req.params.username}).
-    exec(function(err, person) {
+  Person.findOne({username: req.params.username})
+    .exec(function(err, person) {
       if (err) return res.send(err)
       if(!person) return res.send('new')
       res.send('existing')

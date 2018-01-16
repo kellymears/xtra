@@ -18,30 +18,30 @@ import '../containers/nav/topicnav/TopicNav.css'
 
 import Home from '../containers/home/Home'
 
-storiesOf('Navigation', module).
-  addDecorator(story =>
+storiesOf('Navigation', module)
+  .addDecorator(story =>
     <Provider store={store}>
       <BrowserRouter>
         <Container>
           {story()}
         </Container>
       </BrowserRouter>
-    </Provider>).
-  add('Meta Navigation', () => <MetaNavContainer />)
+    </Provider>)
+  .add('Meta Navigation', () => <MetaNavContainer />)
 
-storiesOf('Navigation', module).
-  addDecorator(story =>
+storiesOf('Navigation', module)
+  .addDecorator(story =>
     <Provider store={store}>
       <BrowserRouter>
         <Container>
           {story()}
         </Container>
       </BrowserRouter>
-    </Provider>).
-  add('Topic Navigation', () => <NavContainer />)
+    </Provider>)
+  .add('Topic Navigation', () => <NavContainer />)
 
-storiesOf('Pages', module).
-  addDecorator(story =>
+storiesOf('Pages', module)
+  .addDecorator(story =>
     <Provider store={store}>
       <BrowserRouter>
         <Container>
@@ -50,5 +50,5 @@ storiesOf('Pages', module).
           {story()}
         </Container>
       </BrowserRouter>
-    </Provider>).
-  add('Home', () => <Home />)
+    </Provider>)
+  .add('Home', () => <Home />)

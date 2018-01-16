@@ -15,8 +15,8 @@ function gotStory(story) {
 export function getStory(payload) {
   return (dispatch) => {
     console.log(payload)
-    axios.get(constructURI(payload, 'get')).
-      then(response => {
+    axios.get(constructURI(payload, 'get'))
+      .then(response => {
         console.log(response)
         dispatch(gotStory(response.data))
       })
@@ -32,8 +32,8 @@ function updatedStory(payload) {
 
 export function updateStory(payload) {
   return (dispatch) => {
-    axios.post(constructURI(payload, 'post')).
-      then(response => {
+    axios.post(constructURI(payload, 'post'))
+      .then(response => {
         dispatch(updatedStory(response.data))
       })
   }
@@ -48,8 +48,8 @@ function deletedStory(payload) {
 
 export function deleteStory(payload) {
   return (dispatch) => {
-    axios.post(constructURI(payload, 'post')).
-      then(response => {
+    axios.post(constructURI(payload, 'post'))
+      .then(response => {
         dispatch(deletedStory(response.data))
       })
   }

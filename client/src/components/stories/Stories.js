@@ -15,8 +15,8 @@ class Stories extends Component {
     }
   }
   componentDidMount() {
-    axios.get('/api/story/get/all').
-      then(response => {
+    axios.get('/api/story/get/all')
+      .then(response => {
         this.setState({
           stories: response.data
         })
