@@ -15,20 +15,20 @@ var personSchema = new Schema({
     type:      String,
     lowercase: true
   },
-  first_name:   String,
-  last_name:    String,
-  gender:       String,
-  bio:          String,
-  picture:      String,
-  date_created: {
+  firstName:   String,
+  lastName:    String,
+  gender:      String,
+  bio:         String,
+  picture:     String,
+  dateCreated: {
     type:    Date,
     default: Date.now
   },
-  date_updated: {
+  dateUpdated: {
     type:    Date,
     default: Date.now
   },
-  date_accessed: {
+  dateAccessed: {
     type:    Date,
     default: Date.now
   },

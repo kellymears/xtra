@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -18,12 +18,12 @@ class Stories extends Component {
     }
   }
   componentDidMount() {
-    axios.get('/api/story/get/all')
-      .then(response => {
-         this.setState({
-           stories: response.data
-         })
-         console.log(response.data)
+    axios.get('/api/story/get/all').
+      then(response => {
+        this.setState({
+          stories: response.data
+        })
+        console.log(response.data)
       })
   }
   render() {
@@ -35,7 +35,7 @@ class Stories extends Component {
           {
             this.state.stories.map(({title, subtitle, author}) => {
               return <p key={title}>
-              <Link to={`/@${author.username}/${title}`}>{title}</Link> - {subtitle}</p>
+                <Link to={`/@${author.username}/${title}`}>{title}</Link> - {subtitle}</p>
             })
           }
         </Col>

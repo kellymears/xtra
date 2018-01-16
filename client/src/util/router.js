@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import {
   BrowserRouter,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 
-import { authenticate } from "../actions/profileActions"
+import {authenticate} from '../actions/profileActions'
 
 import SignInCallback from '../containers/profile/SignInCallback'
 import SignOutCallback from '../containers/profile/SignOutCallback'
@@ -23,7 +23,7 @@ import People from '../components/people/People'
 import Person from '../components/people/Person'
 import Stories from '../components/stories/Stories'
 
-import { Container } from 'reactstrap'
+import {Container} from 'reactstrap'
 
 class XtraRouter extends Component {
   render() {

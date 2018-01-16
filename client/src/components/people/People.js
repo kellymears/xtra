@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 import axios from 'axios'
 
 import {
@@ -19,30 +19,29 @@ class People extends Component {
     }
   }
   componentDidMount() {
-    axios.get('/api/person/get/all')
-    .then(response => {
-      console.log(response)
-      this.setState({
-        people: response.data
+    axios.get('/api/person/get/all').
+      then(response => {
+        console.log(response)
+        this.setState({
+          people: response.data
+        })
       })
-    })
   }
   render() {
-    if(this.state.people!==null) {
+    if(this.state.people!==null) 
       return (
         <Row>
           <Col>
             <h4>People</h4>
             <hr/>
             {
-              this.state.people.map(( {username, email} ) => {
+              this.state.people.map(({username, email}) => {
                 return <p><Link to={`/@${username}`}>{username} - {email}</Link></p>
               })
             }
           </Col>
         </Row>
       )
-    }
   }
 }
 

@@ -1,7 +1,7 @@
-import React, {Component} from 'react'
+import {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link, withRouter} from 'react-router-dom'
-import {addProfile, removeProfile} from '../../actions/profileActions'
+import {withRouter} from 'react-router-dom'
+import {removeProfile} from '../../actions/profileActions'
 
 class SignOutCallback extends Component {
   constructor(props) {

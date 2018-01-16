@@ -1,4 +1,4 @@
-import {Block, Value} from 'slate'
+import {Block} from 'slate'
 
 /* always add a trailing paragraph after non-text elements */
 export const schema = {

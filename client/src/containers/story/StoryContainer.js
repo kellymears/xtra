@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
 
-import { getStory } from "../../actions/storyActions"
-import Story from "../../components/stories/StoryComponent"
+import {getStory} from '../../actions/storyActions'
+import Story from '../../components/stories/StoryComponent'
 
 class StoryContainer extends Component {
   componentDidMount(){
@@ -12,7 +12,7 @@ class StoryContainer extends Component {
     console.log(this.props.match.params.story)
     this.props.getStory({
       person: this.props.match.params.person,
-      title:  this.props.match.params.title,
+      title:  this.props.match.params.title
     })
   }
   render() {

@@ -33,12 +33,12 @@ var storySchema = new Schema({
       type: Schema.Types.ObjectId,
       ref:  'Person'
     }],
-    date_created: {type: Date, default: Date.now},
-    date_updated: {type: Date, default: Date.now}
+    dateCreated: {type: Date, default: Date.now},
+    dateUpdated: {type: Date, default: Date.now}
   }],
-  reads:     Number,
-  time_read: Number,
-  date:      {
+  reads:    Number,
+  timeRead: Number,
+  date:     {
     created: {type: Date, default: Date.now},
     updated: {type: Date, default: Date.now}
   },
@@ -46,9 +46,9 @@ var storySchema = new Schema({
 })
 
 storySchema.pre('save', function(next) {
-  this.date.updated = new Date()
-  if (!this.date.created)
-    this.date.created = this.date.updated
+  this.dateUpdated = new Date()
+  if (!this.dateCreated)
+    this.dateCreated = this.dateUpdated
   next()
 })
 

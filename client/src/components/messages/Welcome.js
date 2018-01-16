@@ -1,8 +1,8 @@
-import React from "react"
+import React from 'react'
 
 import {
   Row,
-  Col,
+  Col
 } from 'reactstrap'
 
 const Welcome = props => {

@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Link, withRouter } from 'react-router-dom'
-import { updateMetaNav } from "../../../actions/navActions"
-import { signIn, signOut } from "../../../actions/profileActions"
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Link, withRouter} from 'react-router-dom'
+import {updateMetaNav} from '../../../actions/navActions'
+import {signIn, signOut} from '../../../actions/profileActions'
 
 import Waypoint from 'react-waypoint'
 
@@ -50,12 +50,12 @@ class MetaNavContainer extends Component {
   }
   handleClick(click){
     switch (click) {
-      case 'logout':
-        this.props.signOut()
-      case 'create':
-        this.props.history.push('/create')
-      default:
-        console.log('weird!')
+    case 'logout':
+      this.props.signOut()
+    case 'create':
+      this.props.history.push('/create')
+    default:
+      console.log('weird!')
     }
   }
   _updateNavState(newState) {
@@ -72,10 +72,10 @@ class MetaNavContainer extends Component {
           </Col>
           <Col xs="2">
             <h1 className="MetaNav-title">
-              <Link to="/"><img src={require("../../../assets/img/xtra-medium.jpg")} /></Link>
+              <Link to="/"><img src={require('../../../assets/img/xtra-medium.jpg')} /></Link>
             </h1>
           </Col>
-        { !this.props.profile &&
+          { !this.props.profile &&
           <Col className="getStartedButtonCol" xs="5">
             <Button onClick={() => this.handleSignInClick()} className="getStartedButton" outline color="success">Sign In</Button>
             <div className="search-icon">
@@ -84,8 +84,8 @@ class MetaNavContainer extends Component {
               </Link>
             </div>
           </Col>
-        }
-        { this.props.profile &&
+          }
+          { this.props.profile &&
           <Col className="profileDropdown" xs="5">
             <div className="float-right">
               <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} size="sm">
@@ -105,12 +105,12 @@ class MetaNavContainer extends Component {
               </Dropdown>
             </div>
           </Col>
-        }
+          }
         </Row>
         <Waypoint
-          onEnter={({ event }) => { this._updateNavState('visible') }}
-          onLeave={({ event }) => { this._updateNavState('hidden') }}
-          />
+          onEnter={({event}) => { this._updateNavState('visible') }}
+          onLeave={({event}) => { this._updateNavState('hidden') }}
+        />
       </div>
     )
   }
@@ -119,15 +119,15 @@ class MetaNavContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     visibleMetaNav: state.metaNav.visible,
-    profile: state.profile.data
+    profile:        state.profile.data
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateMetaNav: (visible) => dispatch(updateMetaNav(visible)),
-    signIn: () => dispatch(signIn()),
-    signOut: () => dispatch(signOut())
+    signIn:        () => dispatch(signIn()),
+    signOut:       () => dispatch(signOut())
   }
 }
 

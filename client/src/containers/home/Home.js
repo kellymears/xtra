@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 import {
   Alert,
@@ -37,7 +37,7 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    profile: state.profile.data,
+    profile: state.profile.data
   }
 }
 

@@ -2,7 +2,6 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import thunk from 'redux-thunk'
 import throttle from 'lodash/throttle'
 import decode from 'jwt-decode'
-import axios from 'axios'
 
 import {loadStateFromStorage,
   saveStateToStorage,

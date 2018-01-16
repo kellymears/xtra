@@ -4,7 +4,7 @@ const router = express.Router()
 const aws = require('../modules/awsSign.js')
 
 router.get('', function(req, res){
-  console.log('files!')
+  res.send('files!')
 })
 
 module.exports = router

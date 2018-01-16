@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { Link, withRouter } from 'react-router-dom'
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import {Link, withRouter} from 'react-router-dom'
 
-import { updateMetaNav } from "../../../actions/navActions"
-import { signIn, signOut } from "../../../actions/profileActions"
+import {updateMetaNav} from '../../../actions/navActions'
+import {signIn, signOut} from '../../../actions/profileActions'
 
 import {
   Nav,
@@ -51,13 +51,13 @@ class TopicNavContainer extends Component {
             <NavLink><Link to="/topics">Topics</Link></NavLink>
           </NavItem>
         </Nav>
-      { !this.props.profile &&
+        { !this.props.profile &&
         <Nav className="bg-light float-right">
           <NavItem className={this.getButtonStyle()}>
             <Button onClick={() => this.handleSignInClick()} className="getStartedButton" color="success">Sign In</Button>
           </NavItem>
         </Nav>
-      }
+        }
       </div>
     )
   }
@@ -66,15 +66,15 @@ class TopicNavContainer extends Component {
 const mapStateToProps = (state) => {
   return {
     navState: state.metaNav.navState,
-    profile: state.profile.data
+    profile:  state.profile.data
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateMetaNav: (visible) => dispatch(updateMetaNav(visible)),
-    signIn: () => dispatch(signIn()),
-    signOut: () => dispatch(signOut())
+    signIn:        () => dispatch(signIn()),
+    signOut:       () => dispatch(signOut())
   }
 }
 

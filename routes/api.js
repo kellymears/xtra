@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
+/* eslint-disable */
 const mongoose = require('mongoose')
+/* eslint-enable */
+
 const {Person, Story} = require('../models')
 
 /* persons/profiles */
@@ -42,14 +45,14 @@ router.get('/person/check/:username', function(req, res){
 
 router.post('/person/create/', function(req, res){
   var newPerson = Person({
-    _id:        req.body.id,
-    username:   req.body.username,
-    email:      req.body.email,
-    first_name: req.body.first_name,
-    last_name:  req.body.last_name,
-    picture:    req.body.picture,
-    gender:     req.body.gender,
-    auth:       {
+    _id:       req.body.id,
+    username:  req.body.username,
+    email:     req.body.email,
+    firstName: req.body.firstName,
+    lastName:  req.body.lastName,
+    picture:   req.body.picture,
+    gender:    req.body.gender,
+    auth:      {
       id:     req.body.auth.id,
       access: req.body.auth.access
     }
@@ -71,7 +74,7 @@ router.post('/person/update/', function(req, res){
         id:     req.body.update.auth.id,
         access: req.body.update.auth.access
       },
-      date_accessed: Date.now()
+      dateAccessed: Date.now()
     }
     },
     {new: true},
