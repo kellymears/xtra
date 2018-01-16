@@ -124,11 +124,11 @@ class SignInCallback extends Component {
     return new Promise(resolve => {
       axios.get('/api/person/check/' + username )
       .then(response => {
-          if(response.data=='existing') {
-            resolve(false)
-          } if(response.data=='new') {
-            resolve(true)
-          }
+        if(response.data=='existing') {
+          resolve(false)
+        } if(response.data=='new') {
+          resolve(true)
+        }
       })
     })
   }
@@ -146,8 +146,8 @@ class SignInCallback extends Component {
           username: username,
           id: this.state.profile.sub,
           email: this.state.profile.email,
-          first_name: this.state.profile.given_name,
-          last_name: this.state.profile.family_name,
+          firstName: this.state.profile.given_name,
+          lastName: this.state.profile.family_name,
           picture: this.state.profile.picture,
           gender: this.state.profile.gender,
           auth: {
@@ -169,7 +169,7 @@ class SignInCallback extends Component {
       return(<h1>Loading...</h1>)
     if(this.state.newProfile)
       return(<CreateUsername
-              first_name={this.state.profile.given_name}
+              firstName={this.state.profile.given_name}
               handleUsernameForm={this.handleUsernameForm}
               submissionError={this.state.submissionError}
              />)

@@ -15,7 +15,7 @@ const CreateUsername = props => {
     <Row>
       <Col>
         <br/>
-        <h1>Thanks for signing up for Xtra, { props.first_name }!</h1>
+        <h1>Thanks for signing up for Xtra, { props.firstName }!</h1>
         <hr/>
         <h2 className="lead">
           <strong>All thats left is to pick a username:</strong>

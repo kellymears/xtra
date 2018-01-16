@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import {Link, withRouter} from 'react-router-dom'
@@ -11,10 +10,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  Collapse,
-  Container,
-  Row,
-  Col,
   Button
 } from 'reactstrap'
 

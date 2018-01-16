@@ -1,11 +1,8 @@
 import React from 'react'
 
 import {
-  Collapse,
-  Container,
   Row,
-  Col,
-  Button
+  Col
 } from 'reactstrap'
 
 function renderMarkup(html) {

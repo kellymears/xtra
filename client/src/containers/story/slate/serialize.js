@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Html from 'slate-html-serializer'
 
 const BLOCK_TAGS = {
@@ -55,6 +55,7 @@ const rules = [
       case 'bold': return <strong>{children}</strong>
       case 'italic': return <em>{children}</em>
       case 'underline': return <u>{children}</u>
+      default: return null
       }
     }
   },
@@ -75,6 +76,7 @@ const rules = [
         return <a href={object.data.get('href')}>{children}</a>
       case 'emoji':
         return <span className="emoji">{object.data.get('code')}</span>
+      default: return null
       }
     }
   }

@@ -5,8 +5,6 @@ import Welcome from '../../components/messages/Welcome'
 import ProjectGoals from '../../components/messages/ProjectGoals'
 import AboutContainer from '../../containers/AboutContainer'
 
-import {Button} from 'reactstrap'
-
 class Home extends Component {
   render() {
     if(this.props.profile)

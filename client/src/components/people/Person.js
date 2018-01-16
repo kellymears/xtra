@@ -2,12 +2,8 @@ import React, {Component} from 'react'
 import axios from 'axios'
 
 import {
-  Collapse,
-  Container,
   Row,
-  Col,
-  Jumbotron,
-  Button
+  Col
 } from 'reactstrap'
 
 class Person extends Component {
@@ -27,25 +23,20 @@ class Person extends Component {
   render() {
     if(this.state.person.username===null)
       return (
-        <Container>
-          <Row>
-            <Col>
-              <p>@{this.props.match.params.person} could not be found.</p>
-            </Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col>
+            <p>@{this.props.match.params.person} could not be found.</p>
+          </Col>
+        </Row>
       )
-
     else
       return (
-        <Container>
-          <Row>
-            <Col>
-              <h1>{this.state.person.first_name} {this.state.person.last_name}</h1>
-              <h2>@{this.state.person.username}</h2>
-            </Col>
-          </Row>
-        </Container>
+        <Row>
+          <Col>
+            <h1>{this.state.person.first_name} {this.state.person.last_name}</h1>
+            <h2>@{this.state.person.username}</h2>
+          </Col>
+        </Row>
       )
   }
 }

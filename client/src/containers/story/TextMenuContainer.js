@@ -1,29 +1,12 @@
-import React, {Component} from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import {Link, withRouter} from 'react-router-dom'
-
-import {createStory} from '../../actions/storyActions'
-import {createDraft, updateDraft} from '../../actions/draftActions'
 
 import {Editor, getEventRange, getEventTransfer} from 'slate-react'
 import {Block, Value} from 'slate'
 
-import initialValue from './slate/initialValue.json'
-
-import {
-  Container,
-  Row,
-  Col,
-  Button
-} from 'reactstrap'
-
 import {MdFormatBold,
   MdFormatItalic,
   MdFormatUnderlined,
-  MdFormatStrikethrough,
   MdCode,
   MdFormatSize
 } from 'react-icons/lib/md/'
@@ -95,6 +78,8 @@ class TextMenu extends React.Component {
           <MdFormatSize />
         </span>
       )
+    default:
+      return (null)
     }
   }
 

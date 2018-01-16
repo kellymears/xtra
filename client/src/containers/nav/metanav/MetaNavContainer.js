@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'  //eslint-disable no-unused-vars
+import {bindActionCreators} from 'redux'
 import {Link, withRouter} from 'react-router-dom'
 import {updateMetaNav} from '../../../actions/navActions'
 import {signIn, signOut} from '../../../actions/profileActions'
@@ -8,7 +8,6 @@ import {signIn, signOut} from '../../../actions/profileActions'
 import Waypoint from 'react-waypoint'
 
 import {
-  Container,
   Row,
   Col,
   Button,
